@@ -1,4 +1,4 @@
-# Titi
+# Titi Team Code of Conduct
 ### Contributors: 
 - Eli 😸
 - Santiago 😠
