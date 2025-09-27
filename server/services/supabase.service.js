@@ -5,4 +5,4 @@ const supabase = createClient(
   process.env.SUPABASE_API_KEY
 );
 
-module.exports = supabase;
+module.exports = supabase; 

@@ -13,8 +13,10 @@ const httpServer = createServer(app);
 
 // Middlewares
 app.use(express.json());
-app.use("/app1", express.static(path.join(__dirname, "app1")));
-app.use("/app2", express.static(path.join(__dirname, "app2")));
+app.use("/game", express.static(path.join(__dirname, "game")));
+app.use("/parent", express.static(path.join(__dirname, "parent")));
+app.use("/child", express.static(path.join(__dirname, "child")));
+
 
 // Routes
 app.use("/", usersRouter);
@@ -26,3 +28,5 @@ initSocketInstance(httpServer);
 httpServer.listen(PORT, () =>
   console.log(`Server running at http://localhost:${PORT}`)
 );
+
+// Añadir todos los endpoints que se utilizarán con sus descripciones
