@@ -1,14 +1,8 @@
-let users = [
-  {
-    id: 1,
-    name: "John Doe",
-  },
-];
 
 const supabaseCli = require("../services/supabase.service");
 
-const getAllUsers = async () => {
-  const { data, error } = await supabaseCli.from("users").select();
+const getAllParentsDB = async () => {
+  const { data, error } = await supabaseCli.from("Niño").select();
   if (error) {
     console.error(error);
     return error;
@@ -16,9 +10,9 @@ const getAllUsers = async () => {
   return data;
 };
 
-const createUserInDB = async (user) => {
+const createParentDB = async (user) => {
   const { data, error } = await supabaseCli
-    .from("users")
+    .from("Niño")
     .insert([user])
     .select();
 
@@ -30,9 +24,9 @@ const createUserInDB = async (user) => {
   return data;
 };
 
-const updateUserInDb = async (newData, userId) => {
+const updateParentDB = async (newData, userId) => {
   const { data, error } = await supabaseCli
-    .from("users")
+    .from("Niño")
     .update(newData)
     .eq("id", userId)
     .select();
@@ -44,9 +38,9 @@ const updateUserInDb = async (newData, userId) => {
   return data;
 };
 
-const deleteUserInDb = async (userId) => {
+const deleteParentDB = async (userId) => {
   const { data, error } = await supabaseCli
-    .from("users")
+    .from("Niño")
     .delete()
     .eq("id", userId)
     .select();
@@ -59,8 +53,8 @@ const deleteUserInDb = async (userId) => {
 };
 
 module.exports = {
-  getAllUsers,
-  createUserInDB,
-  updateUserInDb,
-  deleteUserInDb,
+  getAllParentsDB,
+  createParentDB,
+  updateParentDB,
+  deleteParentDB
 };

@@ -2,8 +2,17 @@ const express = require("express");
 const path = require("path");
 const { createServer } = require("http");
 
-const usersRouter = require("./server/routes/users.router");
+const childRouter = require("./server/routes/child.router");
+const parentsRouter = require("./server/routes/parents.router");
+const checkpointRouter = require("./server/routes/checkpoint.router");
+const correctChildRouter = require("./server/routes/correct_child.router");
+const gamesRouter = require("./server/routes/games.router");
+const checkChildRouter = require("./server/routes/check_child.router");
+const stationChildRouter = require("./server/routes/station_child.router");
+const stationsRouter = require("./server/routes/stations.router");
+
 const screen1EventsRouter = require("./server/routes/screen1Events.router");
+
 const { initSocketInstance } = require("./server/services/socket.service");
 
 const PORT = 5050;
@@ -19,7 +28,15 @@ app.use("/child", express.static(path.join(__dirname, "child")));
 
 
 // Routes
-app.use("/", usersRouter);
+app.use("/", childRouter);
+app.use("/", parentsRouter);
+app.use("/", checkpointRouter);
+app.use("/", correctChildRouter);
+app.use("/", gamesRouter);
+app.use("/", checkChildRouter);
+app.use("/", stationChildRouter);
+app.use("/", stationsRouter);
+
 app.use("/", screen1EventsRouter);
 
 // Services
@@ -29,4 +46,3 @@ httpServer.listen(PORT, () =>
   console.log(`Server running at http://localhost:${PORT}`)
 );
 
-// Añadir todos los endpoints que se utilizarán con sus descripciones
