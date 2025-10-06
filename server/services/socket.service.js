@@ -9,21 +9,22 @@ const initSocketInstance = (httpServer) => {
       origin: "*",
     },
   });
+   }
 
-  io.on("connection", (socket) => {
-    console.log("✅ a user connected:", socket.id);
+//   io.on("connection", (socket) => {
+//     console.log("✅ a user connected:", socket.id);
 
-    socket.on("acc", (acc) => {
-      console.log("acceleration data:", acc);
-      // Example: broadcast to others if needed
-      // socket.broadcast.emit("acc-update", acc);
-    });
+//     socket.on("acc", (acc) => {
+//       console.log("acceleration data:", acc);
+//       // Example: broadcast to others if needed
+//       // socket.broadcast.emit("acc-update", acc);
+//     });
 
-    socket.on("disconnect", () => {
-      console.log("user disconnected:", socket.id);
-    });
-  });
-};
+//     socket.on("disconnect", () => {
+//       console.log("user disconnected:", socket.id);
+//     });
+//   });
+// };
 
 const emitEvent = (eventName, data) => {
   if (!io) {

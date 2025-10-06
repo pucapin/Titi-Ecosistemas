@@ -36,8 +36,8 @@ export default function renderPlayChild(data) {
 async function handleMotionEvent(event) {
   const acceleration = event.accelerationIncludingGravity;
 
-  if(acceleration.x > 7) {
-      await makeRequest("/motion", "POST", { acceleration, timestamp: Date.now() });
+  if(acceleration.x > 40) {
+      await makeRequest("/motion", "POST", { acceleration: acceleration.x });
   }
   // EMIT EVENT TO SERVER 
 }
