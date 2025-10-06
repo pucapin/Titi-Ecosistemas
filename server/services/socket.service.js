@@ -1,5 +1,5 @@
+// server/services/socket.service.js
 const { Server } = require("socket.io");
-
 let io;
 
 const initSocketInstance = (httpServer) => {
@@ -8,6 +8,20 @@ const initSocketInstance = (httpServer) => {
     cors: {
       origin: "*",
     },
+  });
+
+  io.on("connection", (socket) => {
+    console.log("✅ a user connected:", socket.id);
+
+    socket.on("acc", (acc) => {
+      console.log("acceleration data:", acc);
+      // Example: broadcast to others if needed
+      // socket.broadcast.emit("acc-update", acc);
+    });
+
+    socket.on("disconnect", () => {
+      console.log("user disconnected:", socket.id);
+    });
   });
 };
 

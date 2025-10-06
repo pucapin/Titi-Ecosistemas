@@ -1,10 +1,14 @@
 const { emitEvent } = require("../services/socket.service");
 
-const handleChangeScreenEvent = (req, res) => {
-  emitEvent("next-screen");
-  res.send({ message: "Cambio de pantalla exitoso" });
-};
+async function motionController(req, res) {
+  const { acceleration } = req.body;
+  console.log("Motion received:", magnitude, timestamp);
+  emitEvent("acc", { acceleration});
+
+  // Maybe store in DB or trigger socket event
+  res.json({ ok: true });
+}
 
 module.exports = {
-  handleChangeScreenEvent,
+  motionController
 };

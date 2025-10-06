@@ -11,7 +11,7 @@ const checkChildRouter = require("./server/routes/check_child.router");
 const stationChildRouter = require("./server/routes/station_child.router");
 const stationsRouter = require("./server/routes/stations.router");
 
-const screen1EventsRouter = require("./server/routes/screen1Events.router");
+const motionEventRouter = require("./server/routes/screen1Events.router");
 
 const { initSocketInstance } = require("./server/services/socket.service");
 
@@ -36,8 +36,7 @@ app.use("/", gamesRouter);
 app.use("/", checkChildRouter);
 app.use("/", stationChildRouter);
 app.use("/", stationsRouter);
-
-app.use("/", screen1EventsRouter);
+app.use("/", motionEventRouter);
 
 // Services
 initSocketInstance(httpServer);
