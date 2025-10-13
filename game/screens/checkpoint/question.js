@@ -1,4 +1,4 @@
-import { makeRequest } from "../../app.js";
+import { navigateTo, socket, makeRequest } from "../../app.js";
 
 
 export default function renderQuestion(data) {
@@ -35,4 +35,17 @@ export default function renderQuestion(data) {
         optionD.textContent = response.Preguntas.opcion_d;
     }
     getQuestion()
+
+    socket.on("answer_result", (data) => {
+    console.log("Answer result received:", data);
+
+    const { questionId, isCorrect } = data;
+    if(isCorrect === true) {
+    navigateTo('/correct', {questionId, isCorrect})
+    } else {
+    navigateTo('/incorrect', {questionId, isCorrect})
+    }
+    
+
+    });
 }
