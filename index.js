@@ -25,6 +25,7 @@ app.use(express.json());
 app.use("/game", express.static(path.join(__dirname, "game")));
 app.use("/parent", express.static(path.join(__dirname, "parent")));
 app.use("/child", express.static(path.join(__dirname, "child")));
+app.use("/assets", express.static(path.join(__dirname, "assets")));
 
 
 // Routes
