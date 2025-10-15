@@ -5,6 +5,9 @@
     box-sizing: border-box;
 }
 
+/* Importar fuente Outfit */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap');
+
 body {
     font-family: 'Arial', sans-serif;
     overflow: hidden;
