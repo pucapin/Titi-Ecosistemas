@@ -1,14 +1,15 @@
 const express = require("express");
 
-const {
+const { getAllParents,
+        createParent, 
         updateParent, 
-        deleteParent, 
-        loginOrRegisterParent}
+        deleteParent }
 = require("../controllers/parents.controller");
 const router = express.Router();
 
 
-router.post("/", loginOrRegisterParent);       // POST /parent
+router.get("/", getAllParents);          // GET /parents
+router.post("/", createParent);       // POST /parents
 router.patch("/:id", updateParent);   // PATCH /parents/:id
 router.delete("/:id", deleteParent);  // DELETE /parents/:id
 
