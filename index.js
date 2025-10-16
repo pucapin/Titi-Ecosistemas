@@ -3,7 +3,7 @@ const path = require("path");
 const { createServer } = require("http");
 
 const childRouter = require("./server/routes/child.router");
-const parentsRouter = require("./server/routes/parents.router");
+const parentRouter = require("./server/routes/parents.router");
 const checkpointRouter = require("./server/routes/checkpoint.router");
 const correctChildRouter = require("./server/routes/correct_child.router");
 const gamesRouter = require("./server/routes/games.router");
@@ -28,8 +28,8 @@ app.use("/child", express.static(path.join(__dirname, "child")));
 
 
 // Routes
-app.use("/", childRouter);
-app.use("/", parentsRouter);
+app.use("/child", childRouter);
+app.use("/parent", parentRouter);
 app.use("/", checkpointRouter);
 app.use("/", correctChildRouter);
 app.use("/", gamesRouter);
