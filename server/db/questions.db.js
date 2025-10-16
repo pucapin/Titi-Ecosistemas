@@ -22,6 +22,7 @@ const answerQuestionDB = async (id, letter) => {
   const isCorrect = question.correct === letter;
 
   emitEvent("answer_result", { questionId: id, isCorrect });
+  // pendiente emitir el cambio en la información del usuario.
 
   return { success: true, isCorrect };
 }
