@@ -36,6 +36,7 @@ function renderRoute(currentRoute) {
   }
 }
 
+
 function navigateTo(path, data) {
   route = { path, data };
   renderRoute(route);

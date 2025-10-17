@@ -1,6 +1,8 @@
 const express = require("express");
 const path = require("path");
 const { createServer } = require("http");
+const { initSocketInstance } = require("./server/services/socket.service");
+
 
 const childRouter = require("./server/routes/child.router");
 const parentRouter = require("./server/routes/parents.router");
@@ -10,10 +12,11 @@ const gamesRouter = require("./server/routes/games.router");
 const checkChildRouter = require("./server/routes/check_child.router");
 const stationChildRouter = require("./server/routes/station_child.router");
 const stationsRouter = require("./server/routes/stations.router");
+const questionsRouter = require("./server/routes/questions.router");
 
 const motionEventRouter = require("./server/routes/screen1Events.router");
 
-const { initSocketInstance } = require("./server/services/socket.service");
+const screen1EventsRouter = require("./server/routes/screen1Events.router");
 
 const PORT = 5050;
 
@@ -28,9 +31,10 @@ app.use("/child", express.static(path.join(__dirname, "child")));
 
 
 // Routes
+app.use("/checkpoint", checkpointRouter);
+app.use("/questions", questionsRouter);
 app.use("/child", childRouter);
 app.use("/parent", parentRouter);
-app.use("/", checkpointRouter);
 app.use("/", correctChildRouter);
 app.use("/", gamesRouter);
 app.use("/", checkChildRouter);
