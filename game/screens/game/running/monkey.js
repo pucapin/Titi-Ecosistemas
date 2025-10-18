@@ -130,13 +130,13 @@ export function drawMonkey(ctx) {
         (monkey.currentFrameTime / monkey.frameDuration) * Math.PI * 2;
       bounceOffset = Math.sin(bounceTime) * 2;
     }
-    ctx.save();
-    ctx.imageSmoothingEnabled = true;
-    ctx.imageSmoothingQuality = "high";
+    
+    // Calcular dimensiones escaladas una sola vez
     const scaledWidth = monkey.width * monkey.scale;
     const scaledHeight = monkey.height * monkey.scale;
     const centeredX = drawX - (scaledWidth - monkey.width) / 2;
     const centeredY = drawY + bounceOffset - (scaledHeight - monkey.height) / 2;
+    
     ctx.drawImage(
       currentImage,
       centeredX,
@@ -144,7 +144,6 @@ export function drawMonkey(ctx) {
       scaledWidth,
       scaledHeight
     );
-    ctx.restore();
   }
 }
 

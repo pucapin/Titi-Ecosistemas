@@ -9,9 +9,11 @@ import { initHUD, updateHUD, drawHUD, addPoints, resetPoints } from "./hud.js";
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
-// Mejorar la calidad de renderizado del canvas
+// Configurar propiedades del canvas una sola vez para mejor rendimiento
 ctx.imageSmoothingEnabled = true;
 ctx.imageSmoothingQuality = "high";
+ctx.textBaseline = "top";
+ctx.textAlign = "left";
 
 // Estado del juego
 const game = {

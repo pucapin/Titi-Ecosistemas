@@ -51,14 +51,15 @@ export function updateObstacle(game) {
     obstacle.spawnTimer = 0;
   }
   
-  // Actualizar posición de los obstáculos existentes
-  obstacle.instances.forEach(obs => {
-    obs.x -= obstacle.speed;
-  });
-  
-  // Eliminar obstáculos que salieron de la pantalla
+  // Calcular dimensiones escaladas una sola vez
   const scaledWidth = obstacle.width * obstacle.scale;
-  obstacle.instances = obstacle.instances.filter(obs => obs.x > -scaledWidth - 50);
+  const removalThreshold = -scaledWidth - 50;
+  
+  // Actualizar posición y eliminar obstáculos fuera de pantalla en una sola pasada
+  obstacle.instances = obstacle.instances.filter(obs => {
+    obs.x -= obstacle.speed;
+    return obs.x > removalThreshold;
+  });
 }
 
 /**
@@ -66,15 +67,12 @@ export function updateObstacle(game) {
  * @param {CanvasRenderingContext2D} ctx
  */
 export function drawObstacle(ctx) {
+  // Calcular dimensiones escaladas una sola vez
+  const scaledWidth = obstacle.width * obstacle.scale;
+  const scaledHeight = obstacle.height * obstacle.scale;
+  
   obstacle.instances.forEach(obs => {
     if (obs.image && obs.image.complete) {
-      ctx.save();
-      ctx.imageSmoothingEnabled = true;
-      ctx.imageSmoothingQuality = "high";
-      
-      const scaledWidth = obstacle.width * obstacle.scale;
-      const scaledHeight = obstacle.height * obstacle.scale;
-      
       ctx.drawImage(
         obs.image,
         obs.x,
@@ -82,8 +80,6 @@ export function drawObstacle(ctx) {
         scaledWidth,
         scaledHeight
       );
-      
-      ctx.restore();
     }
   });
 }

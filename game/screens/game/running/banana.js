@@ -54,14 +54,15 @@ export function updateBanana(game) {
     banana.spawnTimer = 0;
   }
   
-  // Actualizar posición de las bananas existentes
-  banana.instances.forEach(bananaInstance => {
-    bananaInstance.x -= banana.speed;
-  });
-  
-  // Eliminar bananas que salieron de la pantalla
+  // Calcular dimensiones escaladas una sola vez
   const scaledWidth = banana.width * banana.scale;
-  banana.instances = banana.instances.filter(bananaInstance => bananaInstance.x > -scaledWidth - 50);
+  const removalThreshold = -scaledWidth - 50;
+  
+  // Actualizar posición y eliminar bananas fuera de pantalla en una sola pasada
+  banana.instances = banana.instances.filter(bananaInstance => {
+    bananaInstance.x -= banana.speed;
+    return bananaInstance.x > removalThreshold;
+  });
 }
 
 /**
@@ -69,15 +70,12 @@ export function updateBanana(game) {
  * @param {CanvasRenderingContext2D} ctx
  */
 export function drawBanana(ctx) {
+  // Calcular dimensiones escaladas una sola vez
+  const scaledWidth = banana.width * banana.scale;
+  const scaledHeight = banana.height * banana.scale;
+  
   banana.instances.forEach(bananaInstance => {
     if (bananaInstance.image && bananaInstance.image.complete) {
-      ctx.save();
-      ctx.imageSmoothingEnabled = true;
-      ctx.imageSmoothingQuality = "high";
-      
-      const scaledWidth = banana.width * banana.scale;
-      const scaledHeight = banana.height * banana.scale;
-      
       ctx.drawImage(
         bananaInstance.image,
         bananaInstance.x,
@@ -85,8 +83,6 @@ export function drawBanana(ctx) {
         scaledWidth,
         scaledHeight
       );
-      
-      ctx.restore();
     }
   });
 }
@@ -101,17 +97,22 @@ export function checkBananaCollisions(monkey) {
   
   let pointsCollected = 0;
   
+  // Calcular bounds del mono una sola vez
   const monkeyLeft = monkey.smoothX;
   const monkeyRight = monkeyLeft + monkey.width;
   const monkeyTop = monkey.smoothY - monkey.height;
   const monkeyBottom = monkey.smoothY;
   
+  // Calcular dimensiones escaladas una sola vez
+  const scaledWidth = banana.width * banana.scale;
+  const scaledHeight = banana.height * banana.scale;
+  
   // Verificar colisiones y recolectar bananas
   banana.instances = banana.instances.filter(bananaInstance => {
     const bananaLeft = bananaInstance.x;
-    const bananaRight = bananaInstance.x + (banana.width * banana.scale);
+    const bananaRight = bananaLeft + scaledWidth;
     const bananaTop = bananaInstance.y;
-    const bananaBottom = bananaInstance.y + (banana.height * banana.scale);
+    const bananaBottom = bananaTop + scaledHeight;
     
     // Verificar colisión rectangular
     if (monkeyLeft < bananaRight && 
