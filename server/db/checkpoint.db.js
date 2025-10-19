@@ -40,9 +40,6 @@ const { data, error } = await supabaseCli
 };
 
 
-
-
-
 module.exports = {
   getCheckpointDB,
   getQuestionDB
