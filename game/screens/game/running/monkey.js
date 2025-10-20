@@ -157,3 +157,20 @@ export function jump() {
 export function getMonkey() {
   return monkey;
 }
+
+/**
+ * Reinicia el estado del mono
+ */
+export function resetMonkey() {
+  monkey.frame = 0;
+  monkey.frameCount = 0;
+  monkey.isJumping = false;
+  monkey.jumpFrame = 0;
+  monkey.velocityY = 0;
+  monkey.y = monkey.groundY;
+  monkey.smoothY = monkey.groundY;
+  monkey.targetY = monkey.groundY;
+  monkey.frameProgress = 0;
+  monkey.nextFrame = 1;
+  monkey.currentFrameTime = 0;
+}

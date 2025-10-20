@@ -1,3 +1,4 @@
+import { startGame } from "./app.js";
 
 export default function renderGame(data) {
   const app = document.getElementById("app");
@@ -11,9 +12,8 @@ export default function renderGame(data) {
     </div>
         `;
 
-  // Cargar el script dinámicamente
-  const script = document.createElement('script');
-  script.type = 'module';
-  script.src = '/game/screens/game/running/app.js';
-  document.head.appendChild(script);
+  // Iniciar el juego después de que el canvas esté en el DOM
+  setTimeout(() => {
+    startGame();
+  }, 0);
 }

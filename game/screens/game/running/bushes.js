@@ -115,3 +115,11 @@ export function drawBushes(ctx) {
 export function getBushes() {
   return bushes;
 }
+
+/**
+ * Reinicia el estado de los arbustos
+ */
+export function resetBushes() {
+  bushes.instances = [];
+  bushes.spawnTimer = 5000;
+}

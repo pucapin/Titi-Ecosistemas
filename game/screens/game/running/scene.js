@@ -154,4 +154,12 @@ export function getBackground() {
     return background;
 }
 
+/**
+ * Reinicia el estado de la escena
+ */
+export function resetScene() {
+    background.x1 = 0;
+    background.x2 = background.width;
+}
+
 

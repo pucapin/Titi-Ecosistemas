@@ -1,27 +1,17 @@
-import { initScene, updateScene, drawScene, drawTrees } from "./scene.js";
-import { initMonkey, updateMonkey, drawMonkey, jump, getMonkey } from "./monkey.js";
-import { initBushes, updateBushes, drawBushes } from "./bushes.js";
-import { initObstacle, updateObstacle, drawObstacle, checkCollisions, isGameOver } from "./obstacle.js";
-import { initBanana, updateBanana, drawBanana, checkBananaCollisions } from "./banana.js";
+import { initScene, updateScene, drawScene, drawTrees, resetScene } from "./scene.js";
+import { initMonkey, updateMonkey, drawMonkey, jump, getMonkey, resetMonkey } from "./monkey.js";
+import { initBushes, updateBushes, drawBushes, resetBushes } from "./bushes.js";
+import { initObstacle, updateObstacle, drawObstacle, checkCollisions, isGameOver, resetGame as resetObstacle } from "./obstacle.js";
+import { initBanana, updateBanana, drawBanana, checkBananaCollisions, resetBanana } from "./banana.js";
 import { initHUD, updateHUD, drawHUD, addPoints, resetPoints } from "./hud.js";
+import { navigateTo } from "../../../app.js";
 
-// Configuración del juego
-const canvas = document.getElementById("gameCanvas");
-const ctx = canvas.getContext("2d");
-
-// Configurar propiedades del canvas una sola vez para mejor rendimiento
-ctx.imageSmoothingEnabled = true;
-ctx.imageSmoothingQuality = "high";
-ctx.textBaseline = "top";
-ctx.textAlign = "left";
-
-// Estado del juego
-const game = {
-  width: canvas.width,
-  height: canvas.height,
-  running: true,
-  speed: 3.5,
-};
+// Variables globales para el juego
+let canvas;
+let ctx;
+let game;
+let animationFrameId;
+let keydownHandler;
 
 function gameLoop() {
   if (!game.running || isGameOver()) return;
@@ -36,6 +26,12 @@ function gameLoop() {
   // Verificar colisiones con obstáculos
   if (checkCollisions(getMonkey())) {
     game.running = false;
+    // Navigate to lost screen
+    navigateTo("/lost");
+    // Restart game after 3 seconds
+    setTimeout(() => {
+      navigateTo("/game");
+    }, 3000);
     return;
   }
   
@@ -52,10 +48,11 @@ function gameLoop() {
   drawTrees(ctx, game);
   drawBushes(ctx);
   drawHUD(ctx);
-  requestAnimationFrame(gameLoop);
+  animationFrameId = requestAnimationFrame(gameLoop);
 }
 
-document.addEventListener("keydown", (event) => {
+// Definir el handler de teclado
+keydownHandler = (event) => {
   switch (event.code) {
     case "Space":
       event.preventDefault();
@@ -68,7 +65,7 @@ document.addEventListener("keydown", (event) => {
       game.speed = Math.max(game.speed - 0.2, 0.5);
       break;
   }
-});
+};
 
 async function initGame() {
   try {
@@ -86,4 +83,65 @@ async function initGame() {
   }
 }
 
-window.addEventListener("load", initGame);
+function resetGameState() {
+  // Cancelar el loop anterior si existe
+  if (animationFrameId) {
+    cancelAnimationFrame(animationFrameId);
+  }
+  
+  // Reiniciar estado del juego
+  game = {
+    width: canvas.width,
+    height: canvas.height,
+    running: true,
+    speed: 3.5,
+  };
+  
+  // Reiniciar todos los componentes del juego
+  resetObstacle();
+  resetPoints();
+  resetBanana();
+  resetMonkey();
+  resetBushes();
+  resetScene();
+}
+
+export async function startGame() {
+  // Obtener el canvas del DOM
+  canvas = document.getElementById("gameCanvas");
+  if (!canvas) {
+    console.error("Canvas no encontrado");
+    return;
+  }
+  
+  ctx = canvas.getContext("2d");
+  
+  // Configurar propiedades del canvas
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = "high";
+  ctx.textBaseline = "top";
+  ctx.textAlign = "left";
+  
+  // Remover el listener anterior si existe para evitar duplicados
+  if (keydownHandler) {
+    document.removeEventListener("keydown", keydownHandler);
+  }
+  
+  // Agregar el listener de teclado
+  document.addEventListener("keydown", keydownHandler);
+  
+  // Inicializar o reiniciar el estado del juego
+  if (!game) {
+    game = {
+      width: canvas.width,
+      height: canvas.height,
+      running: true,
+      speed: 3.5,
+    };
+  } else {
+    resetGameState();
+  }
+  
+  // Iniciar el juego
+  await initGame();
+}
