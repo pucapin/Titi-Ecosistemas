@@ -2,7 +2,11 @@
 export default function renderIncorrect(data) {
   const app = document.getElementById("app");
   app.innerHTML = `
-        coloca la respuesta incorrecta
+        <div>
+        <h1>
+        Incorrecto!
+        </h1>
+        </div>
         `;
 
 }

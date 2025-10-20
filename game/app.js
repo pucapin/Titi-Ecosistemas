@@ -13,7 +13,7 @@ function clearScripts() {
   document.getElementById("app").innerHTML = "";
 }
 
-let route = { path: "/", data: {} };
+let route = { path: "/question", data: {} };
 renderRoute(route);
 
 function renderRoute(currentRoute) {
@@ -61,4 +61,19 @@ function navigateTo(path, data) {
   renderRoute(route);
 }
 
-export { navigateTo, socket };
+async function makeRequest(url, method, body) {
+  const BASE_URL = "http://localhost:5050";
+  let response = await fetch(`${BASE_URL}${url}`, {
+    method: method,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  });
+
+  response = await response.json();
+  return response;
+}
+
+
+export { navigateTo, socket, makeRequest };
