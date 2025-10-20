@@ -2,7 +2,7 @@ import { initScene, updateScene, drawScene, drawTrees, resetScene } from "./scen
 import { initMonkey, updateMonkey, drawMonkey, jump, getMonkey, resetMonkey } from "./monkey.js";
 import { initBushes, updateBushes, drawBushes, resetBushes } from "./bushes.js";
 import { initObstacle, updateObstacle, drawObstacle, checkCollisions, isGameOver, resetGame as resetObstacle } from "./obstacle.js";
-import { initBanana, updateBanana, drawBanana, checkBananaCollisions, resetBanana } from "./banana.js";
+import { initBanana, updateBanana, drawBanana, checkBananaCollisions, resetBanana, getBananaSpawnedCount } from "./banana.js";
 import { initHUD, updateHUD, drawHUD, addPoints, resetPoints } from "./hud.js";
 import { navigateTo } from "../../../app.js";
 
@@ -12,6 +12,7 @@ let ctx;
 let game;
 let animationFrameId;
 let keydownHandler;
+let navigationTimeoutId = null;
 
 function gameLoop() {
   if (!game.running || isGameOver()) return;
@@ -26,11 +27,20 @@ function gameLoop() {
   // Verificar colisiones con obstáculos
   if (checkCollisions(getMonkey())) {
     game.running = false;
+    // Cancelar el loop de animación
+    if (animationFrameId) {
+      cancelAnimationFrame(animationFrameId);
+    }
+    // Cancelar timeout anterior si existe
+    if (navigationTimeoutId) {
+      clearTimeout(navigationTimeoutId);
+    }
     // Navigate to lost screen
     navigateTo("/lost");
     // Restart game after 3 seconds
-    setTimeout(() => {
+    navigationTimeoutId = setTimeout(() => {
       navigateTo("/game");
+      navigationTimeoutId = null;
     }, 3000);
     return;
   }
@@ -39,6 +49,18 @@ function gameLoop() {
   const pointsCollected = checkBananaCollisions(getMonkey());
   if (pointsCollected > 0) {
     addPoints(pointsCollected);
+  }
+  
+  // Verificar si han aparecido 6 bananas
+  if (getBananaSpawnedCount() >= 4) {
+    game.running = false;
+    // Cancelar el loop de animación
+    if (animationFrameId) {
+      cancelAnimationFrame(animationFrameId);
+    }
+    // Navigate to question screen
+    navigateTo("/question");
+    return;
   }
   
   drawScene(ctx, game);
@@ -57,12 +79,6 @@ keydownHandler = (event) => {
     case "Space":
       event.preventDefault();
       jump();
-      break;
-    case "ArrowUp":
-      game.speed = Math.min(game.speed + 0.2, 3);
-      break;
-    case "ArrowDown":
-      game.speed = Math.max(game.speed - 0.2, 0.5);
       break;
   }
 };
@@ -107,6 +123,17 @@ function resetGameState() {
 }
 
 export async function startGame() {
+  // Cancelar cualquier loop de animación anterior
+  if (animationFrameId) {
+    cancelAnimationFrame(animationFrameId);
+  }
+  
+  // Cancelar cualquier timeout de navegación pendiente
+  if (navigationTimeoutId) {
+    clearTimeout(navigationTimeoutId);
+    navigationTimeoutId = null;
+  }
+  
   // Obtener el canvas del DOM
   canvas = document.getElementById("gameCanvas");
   if (!canvas) {

@@ -10,7 +10,8 @@ const banana = {
   width: 50,
   height: 50,
   points: 50, // Puntos por banana
-  isGameOver: false
+  isGameOver: false,
+  spawnedCount: 0 // Contador de bananas que han aparecido
 };
 
 /**
@@ -50,6 +51,9 @@ export function updateBanana(game) {
       x: game.width + 20,
       y: fixedY
     });
+    
+    // Incrementar contador de bananas aparecidas
+    banana.spawnedCount++;
     
     banana.spawnTimer = 0;
   }
@@ -143,6 +147,7 @@ export function resetBanana() {
   banana.isGameOver = false;
   banana.instances = [];
   banana.spawnTimer = 0;
+  banana.spawnedCount = 0;
 }
 
 /**
@@ -150,4 +155,11 @@ export function resetBanana() {
  */
 export function getBanana() {
   return banana;
+}
+
+/**
+ * Obtener el contador de bananas que han aparecido
+ */
+export function getBananaSpawnedCount() {
+  return banana.spawnedCount;
 }

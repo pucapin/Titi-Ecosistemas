@@ -13,7 +13,7 @@ function clearScripts() {
   document.getElementById("app").innerHTML = "";
 }
 
-let route = { path: "/question", data: {} };
+let route = { path: "/game", data: {} };
 renderRoute(route);
 
 function renderRoute(currentRoute) {
