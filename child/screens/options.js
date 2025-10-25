@@ -15,8 +15,9 @@ export default function renderOptions(data) {
     const optionD = document.getElementById('option-d');
     const questionTitle = document.getElementById('question');
 
-    const checkpointId = '0f65a854-4895-4b64-828a-d1505e92dbfe'
-    let questionId = ''
+    const childId = '08c79a34-c634-43af-8cfd-1c80a5927cb2';
+    const checkpointId = '0f65a854-4895-4b64-828a-d1505e92dbfe';
+    let questionId = '';
 
     async function getOptions() {
         const response = await makeRequest(`/checkpoint/question/${checkpointId}`, "GET");
@@ -26,14 +27,14 @@ export default function renderOptions(data) {
     }
     getOptions()
     
-    optionA.addEventListener('click', () => sendAnswer(questionId, 'a'));
-    optionB.addEventListener('click', () => sendAnswer(questionId, 'b'));
-    optionC.addEventListener('click', () => sendAnswer(questionId, 'c'));
-    optionD.addEventListener('click', () => sendAnswer(questionId, 'd'));
+    optionA.addEventListener('click', () => sendAnswer(questionId, 'a', childId));
+    optionB.addEventListener('click', () => sendAnswer(questionId, 'b', childId));
+    optionC.addEventListener('click', () => sendAnswer(questionId, 'c', childId));
+    optionD.addEventListener('click', () => sendAnswer(questionId, 'd', childId));
 
 
-    async function sendAnswer(id, letter) {
-      const {success, isCorrect, error} = await makeRequest(`/questions/${id}`, "POST", { option: letter });
+    async function sendAnswer(id, letter, childId) {
+      const {success, isCorrect, error} = await makeRequest(`/questions/${id}`, "POST", { option: letter, childId: childId });
 
       if (!success) {
         console.error(error);
