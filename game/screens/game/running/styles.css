@@ -1,0 +1,82 @@
+/* Reset y configuración base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Importar fuente Outfit */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap');
+
+body {
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.game-container {
+    position: relative;
+    overflow: hidden;
+}
+
+#gameCanvas {
+    display: block;
+    background: transparent;
+}
+
+.ui {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 10;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.ui h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    color: #FFD700;
+    font-weight: bold;
+}
+
+.instructions {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.instructions p {
+    margin-bottom: 5px;
+}
+
+/* Estilos responsivos */
+@media (max-width: 1900px) {
+    #gameCanvas {
+        width: 100vw;
+        height: calc(100vw * 0.33);
+        max-width: 1800px;
+        max-height: 600px;
+    }
+    
+    .game-container {
+        border: none;
+        border-radius: 0;
+        width: 100vw;
+        height: 100vh;
+    }
+}
+
+/* Animaciones */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.ui h1 {
+    animation: pulse 2s infinite;
+}
