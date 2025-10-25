@@ -5,7 +5,7 @@ const { initSocketInstance } = require("./server/services/socket.service");
 
 
 const childRouter = require("./server/routes/child.router");
-const parentsRouter = require("./server/routes/parents.router");
+const parentRouter = require("./server/routes/parents.router");
 const checkpointRouter = require("./server/routes/checkpoint.router");
 const gamesRouter = require("./server/routes/games.router");
 const checkChildRouter = require("./server/routes/check_child.router");
