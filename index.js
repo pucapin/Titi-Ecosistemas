@@ -5,7 +5,7 @@ const { initSocketInstance } = require("./server/services/socket.service");
 
 
 const childRouter = require("./server/routes/child.router");
-const parentRouter = require("./server/routes/parents.router");
+const parentsRouter = require("./server/routes/parents.router");
 const checkpointRouter = require("./server/routes/checkpoint.router");
 const gamesRouter = require("./server/routes/games.router");
 const checkChildRouter = require("./server/routes/check_child.router");
@@ -15,7 +15,6 @@ const questionsRouter = require("./server/routes/questions.router");
 
 const motionEventRouter = require("./server/routes/screen1Events.router");
 
-const screen1EventsRouter = require("./server/routes/screen1Events.router");
 
 const PORT = 5050;
 
@@ -27,6 +26,7 @@ app.use(express.json());
 app.use("/game", express.static(path.join(__dirname, "game")));
 app.use("/parent", express.static(path.join(__dirname, "parent")));
 app.use("/child", express.static(path.join(__dirname, "child")));
+app.use("/assets", express.static(path.join(__dirname, "assets")));
 
 
 // Routes

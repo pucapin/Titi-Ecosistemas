@@ -1,7 +1,7 @@
 import renderCorrect from "./screens/checkpoint/correct.js";
 import renderIncorrect from "./screens/checkpoint/incorrect.js";
 import renderQuestion from "./screens/checkpoint/question.js";
-import renderGame from "./screens/game/game.js";
+import renderGame from "./screens/game/running/game.js";
 import renderLost from "./screens/game/lost.js";
 import renderWon from "./screens/game/won.js";
 import renderScanGame from "./screens/scan.js";
@@ -13,14 +13,15 @@ function clearScripts() {
   document.getElementById("app").innerHTML = "";
 }
 
-let route = { path: "/question", data: {} };
+let route = { path: "/game", data: {} };
 renderRoute(route);
 
 function renderRoute(currentRoute) {
   switch (currentRoute?.path) {
     case "/":
       clearScripts();
-      renderScanGame(currentRoute?.data);
+      //renderScanGame(currentRoute?.data);
+      renderGame(currentRoute?.data);
       break;
     case "/tutorial":
       clearScripts();

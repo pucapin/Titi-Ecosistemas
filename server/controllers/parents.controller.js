@@ -1,14 +1,18 @@
-const { 
-        loginOrRegisterParentDB, 
+const { getAllParentsDB, 
+        createParentDB, 
         updateParentDB, 
         deleteParentDB }
 = require("../db/parents.db");
 
 
-//login o registro
-const loginOrRegisterParent = async (req, res) => {
-  const { username, password } = req.body;
-  const response = await loginOrRegisterParentDB(username, password);
+const getAllParents = async (req, res) => {
+  const users = await getAllParentsDB();
+  res.send(users);
+};
+
+const createParent = async (req, res) => {
+  const { name } = req.body;
+  const response = await createParentDB({ name });
   res.send(response);
 };
 
@@ -26,7 +30,8 @@ const deleteParent = async (req, res) => {
 };
 
 module.exports = {
-  loginOrRegisterParent,
+  getAllParents,
+  createParent,
   updateParent,
   deleteParent,
 };
