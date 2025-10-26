@@ -1,4 +1,4 @@
-import { navigateTo } from "../../app.js";
+import { navigateTo, makeRequest } from "../../app.js";
 
 let timeoutId = null;
 
@@ -14,9 +14,12 @@ export default function renderIncorrect(data) {
         <h1>
         Incorrecto!
         </h1>
+        <h2 id="answer"></h2>
         </div>
         `;
   const checkpoint = Number(localStorage.getItem('checkpoint'));
+  const answerEl = document.getElementById('answer')
+  answerEl.textContent = 'La respuesta correcta es: ' + data.correctOption;
 
   // Volver al juego después de 3 segundos
 timeoutId = setTimeout(() => {
