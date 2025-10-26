@@ -16,10 +16,17 @@ export default function renderIncorrect(data) {
         </h1>
         </div>
         `;
+  const checkpoint = Number(localStorage.getItem('checkpoint'));
 
   // Volver al juego después de 3 segundos
-  timeoutId = setTimeout(() => {
-    navigateTo("/game");
+timeoutId = setTimeout(() => {
+  if (checkpoint === 3) {
+    localStorage.setItem('checkpoint', JSON.stringify(0))
+    navigateTo('/end');
     timeoutId = null;
-  }, 3000);
+    return;
+  }
+  navigateTo("/game");
+  timeoutId = null;
+}, 3000);
 }

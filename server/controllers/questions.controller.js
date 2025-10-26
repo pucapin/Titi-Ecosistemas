@@ -13,4 +13,4 @@ const answerQuestion = async (req, res) => {
   }
 };
 
-module.exports = { answerQuestion };
+module.exports = { answerQuestion};

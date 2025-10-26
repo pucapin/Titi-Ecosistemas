@@ -10,7 +10,7 @@ function clearScripts() {
 }
 
 let route = { path: "/", data: {} };
-renderRoute({ path: "/options", data: {} });
+renderRoute({ path: "/play", data: {} });
 
 function renderRoute(currentRoute) {
   switch (currentRoute?.path) {
@@ -44,7 +44,7 @@ function navigateTo(path, data) {
 
 async function makeRequest(url, method, body) {
   const BASE_URL = "http://localhost:5050";
-  //const BASE_URL = "https://5w7mmv4k-5050.use2.devtunnels.ms";
+  //const BASE_URL = "https://s5pxp1mh-5050.use.devtunnels.ms";
   let response = await fetch(`${BASE_URL}${url}`, {
     method: method,
     headers: {

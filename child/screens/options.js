@@ -16,17 +16,18 @@ export default function renderOptions(data) {
     const questionTitle = document.getElementById('question');
 
     const childId = '08c79a34-c634-43af-8cfd-1c80a5927cb2';
-    const checkpointId = '0f65a854-4895-4b64-828a-d1505e92dbfe';
+    console.log(data)
     let questionId = '';
 
     async function getOptions() {
-        const response = await makeRequest(`/checkpoint/question/${checkpointId}`, "GET");
+        const response = await makeRequest(`/checkpoint/question/${data}`, "GET");
         console.log(response);
         questionTitle.innerHTML = response.Preguntas.pregunta;
         questionId = response.Preguntas.id;
     }
     getOptions()
-    
+        // se debe poner el id de la pregunta aqui
+
     optionA.addEventListener('click', () => sendAnswer(questionId, 'a', childId));
     optionB.addEventListener('click', () => sendAnswer(questionId, 'b', childId));
     optionC.addEventListener('click', () => sendAnswer(questionId, 'c', childId));

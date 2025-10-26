@@ -3,7 +3,6 @@ import { startGame } from "./app.js";
 export default function renderGame(data) {
   const app = document.getElementById("app");
   app.innerHTML = `
-        el juego (titi corre)
         
         <link rel="stylesheet" href="/game/screens/game/running/styles.css">
     <div class="game-container">
@@ -14,6 +13,9 @@ export default function renderGame(data) {
 
   // Iniciar el juego después de que el canvas esté en el DOM
   setTimeout(() => {
+    if(!localStorage.getItem('checkpoint') || localStorage.getItem('checkpoint') <= 0) {
+      localStorage.setItem("checkpoint", JSON.stringify(0));
+    }
     startGame();
   }, 0);
 }

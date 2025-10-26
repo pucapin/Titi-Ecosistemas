@@ -1,4 +1,5 @@
 const { getCheckpointDB, getQuestionDB } = require('../db/checkpoint.db');
+const { emitEvent } = require("../services/socket.service");
 
 const getCheckpoint = async (req, res) => {
   try {
@@ -21,5 +22,11 @@ const getCheckpointQuestion = async (req, res) => {
   }
 };
 
+const showCheckpoint = async (req, res) => {
+  const { checkpointId } = req.params;
+  console.log("Show Checkpoint", checkpointId);
+  emitEvent("showQuestion", checkpointId);
+  res.json({ ok: true });
+}
 
-module.exports = { getCheckpoint, getCheckpointQuestion,};
+module.exports = { getCheckpoint, getCheckpointQuestion, showCheckpoint};

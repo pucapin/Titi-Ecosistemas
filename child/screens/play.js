@@ -1,4 +1,4 @@
-import { makeRequest } from "../app.js";
+import { makeRequest, navigateTo, socket } from "../app.js";
 
 export default function renderPlayChild(data) {
   const app = document.getElementById("app");
@@ -6,12 +6,15 @@ export default function renderPlayChild(data) {
         instrucciones en el celular (agitame para saltar)
         <button id="start-game">Start</button>
         `;
-  const startGameBtn = document.getElementById('start-game');
-  startGameBtn.addEventListener('click', initMotionEvent);
-
+ // const startGameBtn = document.getElementById('start-game');
+ // startGameBtn.addEventListener('click', initMotionEvent);
+  initMotionEvent();
 
   //await makeRequest("/motion", "POST");
-
+  socket.on("showQuestion", (checkpointId) => {
+    console.log("received")
+    navigateTo('/options', checkpointId )
+  })
   // Request permission and initialize motion event on user interaction (e.g., button click)
 
   async function initMotionEvent() {

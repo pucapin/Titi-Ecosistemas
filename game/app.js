@@ -4,6 +4,7 @@ import renderQuestion from "./screens/checkpoint/question.js";
 import renderGame from "./screens/game/running/game.js";
 import renderLost from "./screens/game/lost.js";
 import renderWon from "./screens/game/won.js";
+import renderEnd from "./screens/end.js";
 import renderScanGame from "./screens/scan.js";
 import renderTutorial from "./screens/tutorial.js";
 
@@ -50,6 +51,10 @@ function renderRoute(currentRoute) {
     case "/incorrect":
       clearScripts();
       renderIncorrect(currentRoute?.data);
+      break;
+    case "/end":
+      clearScripts();
+      renderEnd(currentRoute?.data);
       break;
     default:
       const app = document.getElementById("app");
