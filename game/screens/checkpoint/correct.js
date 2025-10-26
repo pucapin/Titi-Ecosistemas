@@ -25,7 +25,9 @@ export default function renderCorrect(data) {
     // Volver al juego después de 3 segundos
 timeoutId = setTimeout(() => {
   if (checkpoint === 3) {
+
     localStorage.setItem('checkpoint', JSON.stringify(0))
+    localStorage.removeItem('checkpointOrder')
     navigateTo('/end');
     timeoutId = null;
     return;

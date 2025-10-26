@@ -3,9 +3,9 @@ import { makeRequest } from "../app.js";
 export default function renderStartChild() {
   const app = document.getElementById("app");
   app.innerHTML = `
-      //enter name and parent id
-      <input type="text" placeholder="Enter name" required id="input-user"/>
-      <input type="text" placeholder="Enter Join ID" required id="input-join"/>
+      <input type="text" placeholder="Nombre" required id="input-user"/>
+      <input type="text" placeholder="Código para unirse" required id="input-join"/>
+      <p>Pídele a tu acudiente el ID que aparece en su pantalla!</p>
       <button id="start">Start</button>
       `;
 // Importante añadir un texto explicativo para que entiendan cual es el id
@@ -23,5 +23,4 @@ export default function renderStartChild() {
       console.log(code)
       sendChildData(user, code)
     });
-  // Falta añadir todas las verificaciones aqui, por si el ID no existe enviar un mensaje de que no existe....
 }

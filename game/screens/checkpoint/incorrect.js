@@ -25,6 +25,8 @@ export default function renderIncorrect(data) {
 timeoutId = setTimeout(() => {
   if (checkpoint === 3) {
     localStorage.setItem('checkpoint', JSON.stringify(0))
+    localStorage.removeItem('checkpointOrder')
+
     navigateTo('/end');
     timeoutId = null;
     return;
