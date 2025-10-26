@@ -22,7 +22,10 @@ export default function renderIncorrect(data) {
 timeoutId = setTimeout(() => {
   if (checkpoint === 3) {
     localStorage.setItem('checkpoint', JSON.stringify(0))
-    navigateTo('/end');
+    // Obtener los puntos antes de navegar (NO los borramos aún)
+    const gamePoints = localStorage.getItem('gamePoints');
+    const points = gamePoints ? Number(JSON.parse(gamePoints)) : 0;
+    navigateTo('/end', points);
     timeoutId = null;
     return;
   }

@@ -5,7 +5,7 @@ import { initMonkey, updateMonkey, drawMonkey, jump, getMonkey, resetMonkey } fr
 import { initBushes, updateBushes, drawBushes, resetBushes } from "./bushes.js";
 import { initObstacle, updateObstacle, drawObstacle, checkCollisions, isGameOver, resetGame as resetObstacle } from "./obstacle.js";
 import { initBanana, updateBanana, drawBanana, checkBananaCollisions, resetBanana, getBananaSpawnedCount } from "./banana.js";
-import { initHUD, updateHUD, drawHUD, addPoints, resetPoints } from "./hud.js";
+import { initHUD, updateHUD, drawHUD, addPoints, resetPoints, getPoints, setPoints } from "./hud.js";
 import { navigateTo } from "../../../app.js";
 import { makeRequest } from "../../../app.js";
 
@@ -63,7 +63,7 @@ function gameLoop() {
 }
   
   // Verificar si han aparecido 6 bananas
-  if (getBananaSpawnedCount() >= 2) {
+  if (getBananaSpawnedCount() >= 5  ) {
     game.running = false;
     // Cancelar el loop de animación
     if (animationFrameId) {
@@ -76,6 +76,10 @@ function gameLoop() {
 
     checkNumber += 1;
     localStorage.setItem('checkpoint', JSON.stringify(checkNumber))
+
+    // Guardar los puntos actuales en localStorage antes de ir al checkpoint
+    const currentPoints = getPoints();
+    localStorage.setItem('gamePoints', JSON.stringify(currentPoints));
 
     //Send event to phone  or child client
     makeRequest(`/checkpoint/show/${nextCheckpoint}`, "POST");
@@ -143,11 +147,19 @@ function resetGameState() {
   
   // Reiniciar todos los componentes del juego
   resetObstacle();
-  resetPoints();
+  // No resetear los puntos aquí - se cargarán del localStorage
   resetBanana();
   resetMonkey();
   resetBushes();
   resetScene();
+  
+  // Cargar los puntos guardados en localStorage
+  const savedPoints = localStorage.getItem('gamePoints');
+  if (savedPoints) {
+    setPoints(Number(JSON.parse(savedPoints)));
+  } else {
+    resetPoints(); // Solo resetear si no hay puntos guardados
+  }
 }
 
 export async function startGame() {
@@ -193,10 +205,25 @@ export async function startGame() {
       running: true,
       speed: 3.5,
     };
+    
+    // En el primer inicio, cargar puntos del localStorage si existen
+    const savedPoints = localStorage.getItem('gamePoints');
+    if (savedPoints) {
+      // Los puntos se cargarán después de initHUD en initGame
+    }
   } else {
     resetGameState();
   }
   
   // Iniciar el juego
   await initGame();
+  
+  // Cargar puntos después de inicializar el HUD (solo si es el primer inicio)
+  if (!game.pointsLoaded) {
+    const savedPoints = localStorage.getItem('gamePoints');
+    if (savedPoints) {
+      setPoints(Number(JSON.parse(savedPoints)));
+    }
+    game.pointsLoaded = true;
+  }
 }

@@ -15,6 +15,8 @@ export default function renderGame(data) {
   setTimeout(() => {
     if(!localStorage.getItem('checkpoint') || localStorage.getItem('checkpoint') <= 0) {
       localStorage.setItem("checkpoint", JSON.stringify(0));
+      // Limpiar los puntos guardados al iniciar un nuevo juego
+      localStorage.removeItem('gamePoints');
     }
     startGame();
   }, 0);
