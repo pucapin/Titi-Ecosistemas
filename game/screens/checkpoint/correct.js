@@ -27,8 +27,11 @@ timeoutId = setTimeout(() => {
   if (checkpoint === 3) {
 
     localStorage.setItem('checkpoint', JSON.stringify(0))
+    // Obtener los puntos antes de navegar (NO los borramos aún)
+    const gamePoints = localStorage.getItem('gamePoints');
+    const points = gamePoints ? Number(JSON.parse(gamePoints)) : 0;
     localStorage.removeItem('checkpointOrder')
-    navigateTo('/end');
+    navigateTo('/end', points);
     timeoutId = null;
     return;
   }
