@@ -25,7 +25,8 @@ const { data, error } = await supabaseCli
       opcion_a,
       opcion_b,
       opcion_c,
-      opcion_d
+      opcion_d,
+      correct
     )
   `)
   .eq("id", checkpointId)

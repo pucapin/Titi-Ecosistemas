@@ -26,8 +26,7 @@ export default function renderOptions(data) {
         questionId = response.Preguntas.id;
     }
     getOptions()
-        // se debe poner el id de la pregunta aqui
-
+    // se debe poner el id de la pregunta aqui
     optionA.addEventListener('click', () => sendAnswer(questionId, 'a', childId));
     optionB.addEventListener('click', () => sendAnswer(questionId, 'b', childId));
     optionC.addEventListener('click', () => sendAnswer(questionId, 'c', childId));
