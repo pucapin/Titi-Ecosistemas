@@ -50,7 +50,7 @@ export function initScene(ctx, game) {
             onImageLoad();
         };
         background.image.onerror = onImageError;
-        background.image.src = '/assets/game/scene.svg';
+        background.image.src = 'https://github.com/pucapin/Titi-Ecosistemas/blob/c3b80bb8d304de66f84df6d8ad1a9cc4f34c39db/assets/game/scene.svg';
         
         // Cargar imagen del árbol
         trees.image = new Image();
@@ -61,7 +61,7 @@ export function initScene(ctx, game) {
             onImageLoad();
         };
         trees.image.onerror = onImageError;
-        trees.image.src = '/assets/game/tree.svg';
+        trees.image.src = 'https://github.com/pucapin/Titi-Ecosistemas/blob/c3b80bb8d304de66f84df6d8ad1a9cc4f34c39db/assets/game/tree.svg';
     });
 }
 

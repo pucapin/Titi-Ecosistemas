@@ -23,7 +23,7 @@ export function initBanana() {
     banana.image = new Image();
     banana.image.onload = () => resolve();
     banana.image.onerror = reject;
-    banana.image.src = "/assets/game/banana.png";
+    banana.image.src = "https://github.com/pucapin/Titi-Ecosistemas/blob/c3b80bb8d304de66f84df6d8ad1a9cc4f34c39db/assets/game/banana.png";
   });
 }
 

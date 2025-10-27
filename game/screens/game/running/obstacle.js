@@ -21,7 +21,7 @@ export function initObstacle() {
     obstacle.image = new Image();
     obstacle.image.onload = () => resolve();
     obstacle.image.onerror = reject;
-    obstacle.image.src = "/assets/game/obstacle.svg";
+    obstacle.image.src = "https://github.com/pucapin/Titi-Ecosistemas/blob/c3b80bb8d304de66f84df6d8ad1a9cc4f34c39db/assets/game/obstacle.svg";
   });
 }
 

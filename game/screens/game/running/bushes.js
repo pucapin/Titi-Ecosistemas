@@ -37,12 +37,12 @@ export function initBushes() {
     bushes.images.bush1 = new Image();
     bushes.images.bush1.onload = onLoad;
     bushes.images.bush1.onerror = onError;
-    bushes.images.bush1.src = "/assets/game/bush1.svg";
+    bushes.images.bush1.src = "https://github.com/pucapin/Titi-Ecosistemas/blob/c3b80bb8d304de66f84df6d8ad1a9cc4f34c39db/assets/game/bush1.svg";
 
     bushes.images.bush2 = new Image();
     bushes.images.bush2.onload = onLoad;
     bushes.images.bush2.onerror = onError;
-    bushes.images.bush2.src = "/assets/game/bush2.svg";
+    bushes.images.bush2.src = "https://github.com/pucapin/Titi-Ecosistemas/blob/c3b80bb8d304de66f84df6d8ad1a9cc4f34c39db/assets/game/bush2.svg";
   });
 }
 

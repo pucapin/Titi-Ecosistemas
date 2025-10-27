@@ -59,22 +59,22 @@ export function initMonkey(game) {
     monkey.images.running1 = new Image();
     monkey.images.running1.onload = onLoad;
     monkey.images.running1.onerror = onError;
-    monkey.images.running1.src = "/assets/game/running1.svg";
+    monkey.images.running1.src = "https://github.com/pucapin/Titi-Ecosistemas/blob/c3b80bb8d304de66f84df6d8ad1a9cc4f34c39db/assets/game/running1.svg";
 
     monkey.images.running2 = new Image();
     monkey.images.running2.onload = onLoad;
     monkey.images.running2.onerror = onError;
-    monkey.images.running2.src = "/assets/game/running2.svg";
+    monkey.images.running2.src = "https://github.com/pucapin/Titi-Ecosistemas/blob/c3b80bb8d304de66f84df6d8ad1a9cc4f34c39db/assets/game/running2.svg";
 
     monkey.images.jumping1 = new Image();
     monkey.images.jumping1.onload = onLoad;
     monkey.images.jumping1.onerror = onError;
-    monkey.images.jumping1.src = "/assets/game/jumping1.svg";
+    monkey.images.jumping1.src = "https://github.com/pucapin/Titi-Ecosistemas/blob/c3b80bb8d304de66f84df6d8ad1a9cc4f34c39db/assets/game/jumping1.svg";
 
     monkey.images.jumping2 = new Image();
     monkey.images.jumping2.onload = onLoad;
     monkey.images.jumping2.onerror = onError;
-    monkey.images.jumping2.src = "/assets/game/jumping2.svg";
+    monkey.images.jumping2.src = "https://github.com/pucapin/Titi-Ecosistemas/blob/c3b80bb8d304de66f84df6d8ad1a9cc4f34c39db/assets/game/jumping2.svg";
   });
 }
 
