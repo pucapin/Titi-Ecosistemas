@@ -15,7 +15,9 @@ export default function renderOptions(data) {
     const optionD = document.getElementById('option-d');
     const questionTitle = document.getElementById('question');
 
-    const childId = '08c79a34-c634-43af-8cfd-1c80a5927cb2';
+    //const childId = '08c79a34-c634-43af-8cfd-1c80a5927cb2';
+    const childId = localStorage.getItem("childId");
+    console.log("childId", childId);
     console.log(data)
     let questionId = '';
 

@@ -8,6 +8,12 @@ export default function renderPlayChild(data) {
         `;
  // const startGameBtn = document.getElementById('start-game');
  // startGameBtn.addEventListener('click', initMotionEvent);
+  
+  const startGameBtn = document.getElementById('start-game');
+  startGameBtn.addEventListener('click', async () => {
+    await makeRequest("/start", "POST", {});
+  });
+  
   initMotionEvent();
 
   //await makeRequest("/motion", "POST");
