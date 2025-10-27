@@ -23,9 +23,15 @@ export default function renderOptions(data) {
 
     async function getOptions() {
         const response = await makeRequest(`/checkpoint/question/${data}`, "GET");
-        console.log(response);
-        questionTitle.innerHTML = response.Preguntas.pregunta;
-        questionId = response.Preguntas.id;
+        console.log("Response from API:", response);
+        
+        if (response && response.Preguntas) {
+            questionTitle.innerHTML = response.Preguntas.pregunta;
+            questionId = response.Preguntas.id;
+        } else {
+            console.error("Invalid response structure:", response);
+            questionTitle.innerHTML = "Error loading question";
+        }
     }
     getOptions()
         // se debe poner el id de la pregunta aqui
