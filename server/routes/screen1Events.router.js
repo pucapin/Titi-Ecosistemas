@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const {
-  handleChangeScreenEvent,
-} = require("../controllers/screen1Events.controller");
+  motionController,
+} = require("../controllers/motionEvent.controller");
 
-router.post("/change-screen", handleChangeScreenEvent);
+router.post("/motion", motionController);
 
 module.exports = router;

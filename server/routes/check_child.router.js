@@ -6,5 +6,6 @@ const router = express.Router();
 
 
 router.get("/:child_id", getCheckChild);  // GET /point_child/:id
+router.post("/", getCheckChild);  // GET /point_child/:id
 
 module.exports = router;
