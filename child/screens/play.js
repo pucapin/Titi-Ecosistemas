@@ -11,7 +11,7 @@ export default function renderPlayChild(data) {
   
   const startGameBtn = document.getElementById('start-game');
   startGameBtn.addEventListener('click', async () => {
-    await makeRequest("/start", "POST", {});
+    await makeRequest("/games/start", "POST", {});
   });
   
   initMotionEvent();

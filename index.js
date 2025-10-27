@@ -11,7 +11,7 @@ const checkChildRouter = require("./server/routes/check_child.router");
 const stationChildRouter = require("./server/routes/station_child.router");
 const stationsRouter = require("./server/routes/stations.router");
 const questionsRouter = require("./server/routes/questions.router");
-
+const gamesRouter = require("./server/routes/games.router")
 const motionEventRouter = require("./server/routes/screen1Events.router");
 
 
@@ -32,6 +32,7 @@ app.use("/assets", express.static(path.join(__dirname, "assets")));
 app.use("/checkpoint", checkpointRouter);
 app.use("/questions", questionsRouter);
 app.use("/child", childRouter);
+app.use("/games", gamesRouter);
 app.use("/parent", parentRouter);
 app.use("/checkchild", checkChildRouter);
 app.use("/stationchild", stationChildRouter);
