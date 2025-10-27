@@ -18,10 +18,11 @@ const motionEventRouter = require("./server/routes/screen1Events.router");
 const PORT = 5050;
 
 // CORS
-app.use(cors());
-
 const app = express();
 const httpServer = createServer(app);
+
+
+app.use(cors());
 
 // Middlewares
 app.use(express.json());
