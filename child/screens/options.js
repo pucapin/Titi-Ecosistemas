@@ -1,4 +1,4 @@
-import { makeRequest } from "../app.js";
+import { makeRequest, navigateTo, socket } from "../app.js";
 
 export default function renderOptions(data) {
   const app = document.getElementById("app");
@@ -32,18 +32,30 @@ export default function renderOptions(data) {
     optionC.addEventListener('click', () => sendAnswer(questionId, 'c', childId));
     optionD.addEventListener('click', () => sendAnswer(questionId, 'd', childId));
 
-
     async function sendAnswer(id, letter, childId) {
       const {success, isCorrect, error} = await makeRequest(`/questions/${id}`, "POST", { option: letter, childId: childId });
+
+      let nextScreenTimeout;
 
       if (!success) {
         console.error(error);
       } else if (isCorrect) {
-        console.log("Correct!");
+        app.innerHTML = `<h2>Tu respuesta es correcta!</h2>`;
+        nextScreenTimeout = setTimeout(() => {
+          navigateTo("/play");
+        }, 3000);
       } else {
-        console.log("Wrong!");
+        app.innerHTML = `<h2>Tu respuesta es incorrecta</h2>`;
+        nextScreenTimeout = setTimeout(() => {
+          navigateTo("/play");
+        }, 3000);
       }
-    }
 
+      socket.on("endStation", () => {
+        if (nextScreenTimeout) clearTimeout(nextScreenTimeout);
+        navigateTo("/map");
+      });
+
+    }
 
 }

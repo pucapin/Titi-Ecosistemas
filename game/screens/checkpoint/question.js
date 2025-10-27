@@ -22,6 +22,7 @@ export default function renderQuestion(data) {
     const optionB = document.getElementById('option2');
     const optionC = document.getElementById('option3');
     const optionD = document.getElementById('option4');
+    const correctAnswers = Number(localStorage.getItem('correctAnswers'));
     let correct = '';
     let correctOption = '';
     
@@ -44,12 +45,14 @@ export default function renderQuestion(data) {
     socket.on("answer_result", (data) => {
     console.log("Answer result received:", data);
 
-    const { questionId, isCorrect } = data;
+    const { questionId, isCorrect, childId } = data;
 
     if(isCorrect === true) {
-    navigateTo('/correct', {questionId, isCorrect, correctOption})
+
+    localStorage.setItem('correctAnswers', JSON.stringify(correctAnswers + 1));
+    navigateTo('/correct', {questionId, isCorrect, correctOption, childId})
     } else {
-    navigateTo('/incorrect', {questionId, isCorrect, correctOption})
+    navigateTo('/incorrect', {questionId, isCorrect, correctOption, childId})
     }
 
     });

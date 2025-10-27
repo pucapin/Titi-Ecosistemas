@@ -3,8 +3,7 @@ import { makeRequest, navigateTo, socket } from "../app.js";
 export default function renderPlayChild(data) {
   const app = document.getElementById("app");
   app.innerHTML = `
-        instrucciones en el celular (agitame para saltar)
-        <button id="start-game">Start</button>
+        <h1>Mueve el celular hacia arriba para saltar!</h1>
         `;
  // const startGameBtn = document.getElementById('start-game');
  // startGameBtn.addEventListener('click', initMotionEvent);

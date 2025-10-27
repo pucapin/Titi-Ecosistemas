@@ -12,6 +12,24 @@ const getStationChildDB = async () => {
   return data;
 };
 
+const endStationDB = async (childId, stationId, completed, correctas) => {
+  const { data, error } = await supabaseCli
+    .from("Estacion_Niño")
+    .insert([
+      {
+        id_niño: childId,
+        id_estacion: stationId,
+        completed,
+        correctas,
+      },
+    ])
+    .select();
+  if (error) throw error;
+  return data;
+};
+
+
 module.exports = {
-  getStationChildDB
+  getStationChildDB,
+  endStationDB
 };

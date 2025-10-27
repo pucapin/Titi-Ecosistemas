@@ -1,4 +1,4 @@
-import { makeRequest } from "../app.js";
+import { makeRequest, navigateTo } from "../app.js";
 
 export default function renderEnd(data) {
   const app = document.getElementById("app");
@@ -26,6 +26,10 @@ export default function renderEnd(data) {
   
   // Enviar puntos al servidor
   sendPointsToServer(childId, points);
+
+  setTimeout(() => {
+  navigateTo("/"); 
+}, 5000);
 }
 
 async function sendPointsToServer(childId, points) {

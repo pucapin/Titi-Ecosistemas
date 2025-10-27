@@ -20,7 +20,6 @@ export default function renderStartChild() {
       const user = document.getElementById("input-user").value;
       let code  = document.getElementById("input-join").value;
       code = code.trim().toUpperCase();
-      console.log(code)
       sendChildData(user, code)
     });
 }

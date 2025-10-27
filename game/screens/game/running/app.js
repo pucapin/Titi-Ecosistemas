@@ -57,11 +57,13 @@ function gameLoop() {
     addPoints(pointsCollected);
   }
 
-  if (!localStorage.getItem('checkpointOrder')) {
+  if (!localStorage.getItem('checkpointOrder') || JSON.parse(localStorage.getItem('checkpointOrder')).length === 0) {
   let shuffled = [...checkpoints].sort(() => Math.random() - 0.5);
   localStorage.setItem('checkpointOrder', JSON.stringify(shuffled.slice(0, 3)));
 }
-  
+  if(!localStorage.getItem('correctAnswers')) {
+    localStorage.setItem('correctAnswers', JSON.stringify(0));
+  }
   // Verificar si han aparecido 6 bananas
   if (getBananaSpawnedCount() >= 5  ) {
     game.running = false;
