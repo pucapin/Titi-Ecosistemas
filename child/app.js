@@ -9,8 +9,12 @@ function clearScripts() {
   document.getElementById("app").innerHTML = "";
 }
 
-let route = { path: "/", data: {} };
-renderRoute({ path: "/play", data: {} });
+// Verificar si hay una sesión guardada
+const childId = localStorage.getItem("childId");
+let route = childId 
+  ? { path: "/play", data: { user: { id: childId } } } 
+  : { path: "/", data: {} };
+renderRoute(route);
 
 function renderRoute(currentRoute) {
   switch (currentRoute?.path) {

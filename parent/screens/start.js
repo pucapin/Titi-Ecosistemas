@@ -1,4 +1,4 @@
-import { makeRequest } from "../app.js";
+import { makeRequest, navigateTo } from "../app.js";
 
 export default function renderStartParent(data) {
   const app = document.getElementById("app");
@@ -13,6 +13,13 @@ export default function renderStartParent(data) {
     async function sendParentData(username, password) {
       const response = await makeRequest("/parent", "POST", {username: username, password: password} );
       console.log("response", response);
+      if (response?.user?.id) {
+        localStorage.setItem("parentId", response.user.id);
+      }
+      if (response?.user?.join_code) {
+        localStorage.setItem("joinCode", response.user.join_code);
+      }
+      navigateTo("/code", response);
     }
     const registerBtn = document.getElementById('register');
     registerBtn.addEventListener("click", (e) => {
