@@ -1,4 +1,4 @@
-import { makeRequest } from "../app.js";
+import { makeRequest, navigateTo } from "../app.js";
 
 export default function renderStartChild() {
   const app = document.getElementById("app");
@@ -13,6 +13,10 @@ export default function renderStartChild() {
       async function sendChildData(username, code) {
       const response = await makeRequest("/child", "POST", {username: username, code: code} );
       console.log("response", response);
+      if (response?.user?.id) {
+        localStorage.setItem("childId", response.user.id);
+      }
+      navigateTo("/play", response);
     }
     const startBtn = document.getElementById('start');
     startBtn.addEventListener("click", (e) => {

@@ -13,14 +13,13 @@ function clearScripts() {
   document.getElementById("app").innerHTML = "";
 }
 
-let route = { path: "/game", data: {} };
+let route = { path: "/", data: {} };
 renderRoute(route);
 
 function renderRoute(currentRoute) {
   switch (currentRoute?.path) {
     case "/":
       clearScripts();
-      //renderScanGame(currentRoute?.data);
       renderScanGame(currentRoute?.data);
       break;
     case "/tutorial":
@@ -76,5 +75,10 @@ async function makeRequest(url, method, body) {
   return response;
 }
 
+// Escuchar cuando el child inicie el juego
+socket.on("startGame", (data) => {
+  console.log("Game starting:", data);
+  navigateTo("/game", {});
+});
 
 export { navigateTo, socket, makeRequest };

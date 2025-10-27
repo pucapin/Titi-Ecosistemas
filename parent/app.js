@@ -4,6 +4,7 @@ import renderMapParent from "./screens/map.js";
 import renderMedals from "./screens/medals.js";
 import renderResultsParent from "./screens/results.js";
 import renderStartParent from "./screens/start.js";
+import renderCode from "./screens/code.js";
 
 const socket = io("/", { path: "/real-time" });
 
@@ -11,7 +12,19 @@ function clearScripts() {
   document.getElementById("app").innerHTML = "";
 }
 
-let route = { path: "/", data: {} };
+// Verificar si hay una sesión guardada
+const parentId = localStorage.getItem("parentId");
+const joinCode = localStorage.getItem("joinCode");
+const childLoggedIn = localStorage.getItem("childId");
+
+let route;
+if (!parentId) {
+  route = { path: "/start", data: {} };
+} else if (childLoggedIn) {
+  route = { path: "/", data: {} };
+} else {
+  route = { path: "/code", data: { user: { id: parentId, join_code: joinCode } } };
+}
 renderRoute(route);
 
 function renderRoute(currentRoute) {
@@ -35,6 +48,10 @@ function renderRoute(currentRoute) {
     case "/medals":
       clearScripts();
       renderMedals(currentRoute?.data);
+      break;
+    case "/code":
+      clearScripts();
+      renderCode(currentRoute?.data);
       break;
     case "/results":
       clearScripts();
@@ -65,5 +82,11 @@ function navigateTo(path, data) {
   route = { path, data };
   renderRoute(route);
 }
+
+// Escuchar cuando un niño inicie sesión
+socket.on("childLoggedIn", (data) => {
+  console.log("Child logged in:", data);
+  navigateTo("/", {});
+});
 
 export { navigateTo, socket, makeRequest};

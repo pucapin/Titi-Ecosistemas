@@ -65,7 +65,7 @@ function gameLoop() {
     localStorage.setItem('correctAnswers', JSON.stringify(0));
   }
   // Verificar si han aparecido 6 bananas
-  if (getBananaSpawnedCount() >= 5  ) {
+  if (getBananaSpawnedCount() >= 5) {
     game.running = false;
     // Cancelar el loop de animación
     if (animationFrameId) {
