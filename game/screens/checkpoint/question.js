@@ -22,6 +22,11 @@ export default function renderQuestion(data) {
     const optionB = document.getElementById('option2');
     const optionC = document.getElementById('option3');
     const optionD = document.getElementById('option4');
+    const correctAnswers = Number(localStorage.getItem('correctAnswers'));
+    let correct = '';
+    let correctOption = '';
+    
+
 
     // se debe poner el id de la pregunta aqui
     async function getQuestion() {
@@ -31,18 +36,23 @@ export default function renderQuestion(data) {
         optionB.textContent = response.Preguntas.opcion_b;
         optionC.textContent = response.Preguntas.opcion_c;
         optionD.textContent = response.Preguntas.opcion_d;
+        correct = 'opcion_' + response.Preguntas.correct;
+        correctOption = response.Preguntas[correct];
+
     }
     getQuestion()
 
     socket.on("answer_result", (data) => {
     console.log("Answer result received:", data);
 
-    const { questionId, isCorrect } = data;
+    const { questionId, isCorrect, childId } = data;
 
     if(isCorrect === true) {
-    navigateTo('/correct', {questionId, isCorrect})
+
+    localStorage.setItem('correctAnswers', JSON.stringify(correctAnswers + 1));
+    navigateTo('/correct', {questionId, isCorrect, correctOption, childId})
     } else {
-    navigateTo('/incorrect', {questionId, isCorrect})
+    navigateTo('/incorrect', {questionId, isCorrect, correctOption, childId})
     }
 
     });

@@ -1,6 +1,7 @@
 const {
         loginOrRegisterChildDB, 
-        deleteChildDB }
+        deleteChildDB,
+        updateChildPointsDB }
  = require("../db/child.db");
 const { emitEvent } = require("../services/socket.service");
 
@@ -31,8 +32,32 @@ const deleteChild = async (req, res) => {
   res.send(response);
 };
 
+const updateChildPoints = async (req, res) => {
+  try {
+    const { id: childId } = req.params;
+    const { points } = req.body;
+    
+    if (!points && points !== 0) {
+      return res.status(400).json({ 
+        success: false, 
+        error: "Points are required" 
+      });
+    }
+
+    const response = await updateChildPointsDB(childId, points);
+    res.json(response);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ 
+      success: false, 
+      error: err.message 
+    });
+  }
+};
+
 module.exports = {
   loginOrRegisterChild,
   updateChild,
   deleteChild,
+  updateChildPoints,
 };

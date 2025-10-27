@@ -89,7 +89,34 @@ const deleteChildDB = async (userId) => {
   return data;
 };
 
+const updateChildPointsDB = async (childId, points) => {
+  try {
+    const { data, error } = await supabaseCli
+      .from("Niño")
+      .update({ puntos: points })
+      .eq("id", childId)
+      .select()
+      .single();
+
+    if (error) throw error;
+
+    return {
+      success: true,
+      message: "Points updated successfully",
+      data: data
+    };
+
+  } catch (err) {
+    console.error("Error updating child points:", err);
+    return { 
+      success: false, 
+      error: err.message 
+    };
+  }
+};
+
 module.exports = {
   loginOrRegisterChildDB,
-  deleteChildDB
+  deleteChildDB,
+  updateChildPointsDB
 };

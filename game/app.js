@@ -3,7 +3,6 @@ import renderIncorrect from "./screens/checkpoint/incorrect.js";
 import renderQuestion from "./screens/checkpoint/question.js";
 import renderGame from "./screens/game/running/game.js";
 import renderLost from "./screens/game/lost.js";
-import renderWon from "./screens/game/won.js";
 import renderEnd from "./screens/end.js";
 import renderScanGame from "./screens/scan.js";
 import renderTutorial from "./screens/tutorial.js";
@@ -34,10 +33,6 @@ function renderRoute(currentRoute) {
     case "/lost":
       clearScripts();
       renderLost(currentRoute?.data);
-      break;
-    case "/won":
-      clearScripts();
-      renderWon(currentRoute?.data);
       break;
     case "/question":
       clearScripts();
