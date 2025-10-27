@@ -1,5 +1,4 @@
 
-
 const supabaseCli = require("../services/supabase.service");
 
 // Añadir todos los llamados con su descripción
@@ -14,6 +13,35 @@ const getCheckpointDB = async () => {
   return data;
 };
 
+const getQuestionDB = async (checkpointId) => {
+const { data, error } = await supabaseCli
+  .from("Checkpoint")
+  .select(`
+    id,
+    pregunta,
+    Preguntas (
+      id,
+      pregunta,
+      opcion_a,
+      opcion_b,
+      opcion_c,
+      opcion_d,
+      correct
+    )
+  `)
+  .eq("id", checkpointId)
+  .maybeSingle();
+
+  if (error) {
+    console.error("Error in getQuestionDB:", error.message);
+    return null;
+  }
+
+  return data;
+};
+
+
 module.exports = {
-  getCheckpointDB
+  getCheckpointDB,
+  getQuestionDB
 };

@@ -9,7 +9,11 @@ function clearScripts() {
   document.getElementById("app").innerHTML = "";
 }
 
-let route = { path: "/", data: {} };
+// Verificar si hay una sesión guardada
+const childId = localStorage.getItem("childId");
+let route = childId 
+  ? { path: "/play", data: { user: { id: childId } } } 
+  : { path: "/", data: {} };
 renderRoute(route);
 
 function renderRoute(currentRoute) {
@@ -36,9 +40,26 @@ function renderRoute(currentRoute) {
   }
 }
 
+
 function navigateTo(path, data) {
   route = { path, data };
   renderRoute(route);
 }
 
-export { navigateTo, socket };
+async function makeRequest(url, method, body) {
+  const BASE_URL = "https://backend-three-rho-19.vercel.app";
+  //const BASE_URL = "https://s5pxp1mh-5050.use.devtunnels.ms";
+  let response = await fetch(`${BASE_URL}${url}`, {
+    method: method,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  });
+
+  response = await response.json();
+  return response;
+}
+
+
+export { navigateTo, socket, makeRequest };
