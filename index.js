@@ -2,7 +2,7 @@ const express = require("express");
 const path = require("path");
 const { createServer } = require("http");
 const { initSocketInstance } = require("./server/services/socket.service");
-
+const cors = require("cors")
 
 const childRouter = require("./server/routes/child.router");
 const parentRouter = require("./server/routes/parents.router");
@@ -16,6 +16,9 @@ const motionEventRouter = require("./server/routes/screen1Events.router");
 
 
 const PORT = 5050;
+
+// CORS
+app.use(cors());
 
 const app = express();
 const httpServer = createServer(app);
