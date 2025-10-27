@@ -6,7 +6,10 @@ import renderResultsParent from "./screens/results.js";
 import renderStartParent from "./screens/start.js";
 import renderCode from "./screens/code.js";
 
-const socket = io("/", { path: "/real-time" });
+const SUPABASE_URL="https://cmyrktpbeqcoodpebbuz.supabase.co"
+const ANON_KEY ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNteXJrdHBiZXFjb29kcGViYnV6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg4Mjk2MjAsImV4cCI6MjA3NDQwNTYyMH0.pFgGt0Ycx2wAETy6TNV-62aWgO23ac7OypY8JksW0P8"
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, ANON_KEY);
+const channel = supabaseClient.channel("realtime-events");
 
 function clearScripts() {
   document.getElementById("app").innerHTML = "";
@@ -64,7 +67,7 @@ function renderRoute(currentRoute) {
 }
 
 async function makeRequest(url, method, body) {
-  const BASE_URL = "https://backend-three-rho-19.vercel.app";
+  const BASE_URL = "http://localhost:5050";
   let response = await fetch(`${BASE_URL}${url}`, {
     method: method,
     headers: {
@@ -84,9 +87,9 @@ function navigateTo(path, data) {
 }
 
 // Escuchar cuando un niño inicie sesión
-socket.on("childLoggedIn", (data) => {
+channel.on("broadcast",{event: "childLoggedIn"}, (data) => {
   console.log("Child logged in:", data);
   navigateTo("/", {});
-});
+}).subscribe();
 
-export { navigateTo, socket, makeRequest};
+export { navigateTo, channel, makeRequest};

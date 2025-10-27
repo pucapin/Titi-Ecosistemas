@@ -1,4 +1,4 @@
-import { makeRequest, navigateTo, socket } from "../app.js";
+import { makeRequest, navigateTo, channel } from "../app.js";
 
 export default function renderOptions(data) {
   const app = document.getElementById("app");
@@ -59,10 +59,10 @@ export default function renderOptions(data) {
         }, 3000);
       }
 
-      socket.on("endStation", () => {
+      channel.on("broadcast",{event: "endStation"}, () => {
         if (nextScreenTimeout) clearTimeout(nextScreenTimeout);
         navigateTo("/map");
-      });
+      }).subscribe();
 
     }
 

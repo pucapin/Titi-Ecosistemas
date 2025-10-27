@@ -24,7 +24,7 @@ const getGameByChild = async (req, res) => {
 const startGame = async (req, res) => {
   try {
     console.log("Game started");
-    emitEvent("startGame", {});
+    await emitEvent("startGame", {});
     res.json({ ok: true, message: "Game started" });
   } catch (err) {
     console.error("Error:", err);

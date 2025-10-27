@@ -1,36 +1,23 @@
-// server/services/socket.service.js
-const { Server } = require("socket.io");
-let io;
+const supabase = require("./supabase.service");
 
-const initSocketInstance = (httpServer) => {
-  io = new Server(httpServer, {
-    path: "/real-time",
-    cors: {
-      origin: "*",
-    },
-  });
-   }
+let channel;
 
-//   io.on("connection", (socket) => {
-//     console.log("✅ a user connected:", socket.id);
+const initSocketInstance = () => {
+  channel = supabase.channel("realtime-events");
+};
 
-//     socket.on("acc", (acc) => {
-//       console.log("acceleration data:", acc);
-//       // Example: broadcast to others if needed
-//       // socket.broadcast.emit("acc-update", acc);
-//     });
-
-//     socket.on("disconnect", () => {
-//       console.log("user disconnected:", socket.id);
-//     });
-//   });
-// };
-
-const emitEvent = (eventName, data) => {
-  if (!io) {
-    throw new Error("Socket.io instance is not initialized");
+const emitEvent = async (eventName, data = {}) => {
+  if (!channel) {
+    throw new Error("Supabase channel is not initialized");
   }
-  io.emit(eventName, data);
+
+  const resp = await channel.send({
+    type: "broadcast",
+    event: eventName,
+    payload: data,
+  });
+
+  return resp;
 };
 
 module.exports = {
