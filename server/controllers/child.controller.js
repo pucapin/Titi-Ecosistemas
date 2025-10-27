@@ -12,7 +12,7 @@ const loginOrRegisterChild = async (req, res) => {
   
   // Emitir evento cuando el child se registra exitosamente
   if (response.status === 201 || response.status === 200) {
-    emitEvent("childLoggedIn", { childId: response.user?.id, parentId: response.user?.id_padre });
+    await emitEvent("childLoggedIn", { childId: response.user?.id, parentId: response.user?.id_padre });
   }
   
   res.send(response);

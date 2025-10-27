@@ -3,7 +3,10 @@ import renderOptions from "./screens/options.js";
 import renderPlayChild from "./screens/play.js";
 import renderStartChild from "./screens/start.js";
 
-const socket = io("/", { path: "/real-time" });
+const SUPABASE_URL="https://cmyrktpbeqcoodpebbuz.supabase.co"
+const ANON_KEY ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNteXJrdHBiZXFjb29kcGViYnV6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg4Mjk2MjAsImV4cCI6MjA3NDQwNTYyMH0.pFgGt0Ycx2wAETy6TNV-62aWgO23ac7OypY8JksW0P8"
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, ANON_KEY);
+const channel = supabaseClient.channel("realtime-events");
 
 function clearScripts() {
   document.getElementById("app").innerHTML = "";
@@ -62,4 +65,4 @@ async function makeRequest(url, method, body) {
 }
 
 
-export { navigateTo, socket, makeRequest };
+export { navigateTo, channel, makeRequest };

@@ -16,7 +16,7 @@ const endStation = async (req, res) => {
     const { childId, stationId, completed, correctas } = req.body;
     const result = await endStationDB(childId, stationId, completed, correctas);
 
-    emitEvent("endStation");
+    await emitEvent("endStation");
     res.json({ ok: true, data: result });
   } catch (error) {
     console.error("Error in endStation:", error);

@@ -30,7 +30,7 @@ const answerQuestionDB = async (questionId, option, childId) => {
 
     if (insertError) throw insertError;
 
-    emitEvent("answer_result", {
+    await emitEvent("answer_result", {
       questionId,
       isCorrect,
       childId,

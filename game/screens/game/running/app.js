@@ -1,4 +1,4 @@
-const socket = io("/", { path: "/real-time" });
+
 
 import { initScene, updateScene, drawScene, drawTrees, resetScene } from "./scene.js";
 import { initMonkey, updateMonkey, drawMonkey, jump, getMonkey, resetMonkey } from "./monkey.js";
@@ -6,7 +6,7 @@ import { initBushes, updateBushes, drawBushes, resetBushes } from "./bushes.js";
 import { initObstacle, updateObstacle, drawObstacle, checkCollisions, isGameOver, resetGame as resetObstacle } from "./obstacle.js";
 import { initBanana, updateBanana, drawBanana, checkBananaCollisions, resetBanana, getBananaSpawnedCount } from "./banana.js";
 import { initHUD, updateHUD, drawHUD, addPoints, resetPoints, getPoints, setPoints } from "./hud.js";
-import { navigateTo } from "../../../app.js";
+import { navigateTo, channel } from "../../../app.js";
 import { makeRequest } from "../../../app.js";
 
 // Variables globales para el juego
@@ -20,7 +20,7 @@ let navigationTimeoutId = null;
 
 let checkpoints = ['0f65a854-4895-4b64-828a-d1505e92dbfe', '29ff798a-4ec9-414d-ad28-b70c8d43aae7', '4560b48d-3509-4faf-b92f-1ec1f61ccf40', '7910659b-7d97-43df-9403-660be15d9c3b', 'c68d7e1c-b874-4f43-b9e2-bd2cae3b9457', 'cfce72a3-c24b-4614-93e6-e9d2c14e9ae3' ];
 
-function gameLoop() {
+async function gameLoop() {
   if (!game.running || isGameOver()) return;
   ctx.clearRect(0, 0, game.width, game.height);
   updateScene(game);
@@ -84,7 +84,7 @@ function gameLoop() {
     localStorage.setItem('gamePoints', JSON.stringify(currentPoints));
 
     //Send event to phone  or child client
-    makeRequest(`/checkpoint/show/${nextCheckpoint}`, "POST");
+    await makeRequest(`/checkpoint/show/${nextCheckpoint}`, "POST");
     // Navigate to question screen
     navigateTo("/question", nextCheckpoint);
 
@@ -102,8 +102,6 @@ function gameLoop() {
 }
 
 // Definir el handler de teclado
-// Definir el socket.on
-
 keydownHandler = (event) => {
   switch (event.code) {
     case "Space":
@@ -112,10 +110,6 @@ keydownHandler = (event) => {
       break;
   }
 };
-
-socket.on("jumpUp", () => {
-  jump()
-})
 
 async function initGame() {
   try {
@@ -198,6 +192,11 @@ export async function startGame() {
   
   // Agregar el listener de teclado
   document.addEventListener("keydown", keydownHandler);
+  
+  // Suscribirse al evento de salto desde el canal
+  channel.on("broadcast",{event: "jumpUp"}, () => {
+    jump();
+  }).subscribe();
   
   // Inicializar o reiniciar el estado del juego
   if (!game) {

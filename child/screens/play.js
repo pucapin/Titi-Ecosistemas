@@ -1,4 +1,4 @@
-import { makeRequest, navigateTo, socket } from "../app.js";
+import { makeRequest, navigateTo, channel } from "../app.js";
 
 export default function renderPlayChild(data) {
   const app = document.getElementById("app");
@@ -17,10 +17,9 @@ export default function renderPlayChild(data) {
   initMotionEvent();
 
   //await makeRequest("/motion", "POST");
-  socket.on("showQuestion", (checkpointId) => {
-    console.log("received")
-    navigateTo('/options', checkpointId )
-  })
+  channel.on("broadcast",{event: "showQuestion"}, ({payload}) => {
+    navigateTo('/options', payload.checkpointId)
+  }).subscribe();
   // Request permission and initialize motion event on user interaction (e.g., button click)
 
   async function initMotionEvent() {

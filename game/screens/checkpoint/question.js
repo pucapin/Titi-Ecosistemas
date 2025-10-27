@@ -1,4 +1,4 @@
-import { navigateTo, socket, makeRequest } from "../../app.js";
+import { navigateTo, channel, makeRequest } from "../../app.js";
 
 
 export default function renderQuestion(data) {
@@ -42,7 +42,7 @@ export default function renderQuestion(data) {
     }
     getQuestion()
 
-    socket.on("answer_result", (data) => {
+    channel.on("broadcast",{event: "answer_result"}, (data) => {
     console.log("Answer result received:", data);
 
     const { questionId, isCorrect, childId } = data;
@@ -55,5 +55,5 @@ export default function renderQuestion(data) {
     navigateTo('/incorrect', {questionId, isCorrect, correctOption, childId})
     }
 
-    });
+    }).subscribe();
 }
