@@ -12,6 +12,36 @@ const getStationChildDB = async () => {
   return data;
 };
 
+const getStationsByChildDB = async (childId) => {
+  try {
+    const { data, error } = await supabaseCli
+      .from("Estacion_Niño")
+      .select(`
+        id,
+        id_estacion,
+        completed,
+        correctas,
+        Estacion (
+          id,
+          name
+        )
+      `)
+      .eq("id_niño", childId)
+      .order('id', { ascending: true });
+
+    if (error) throw error;
+
+    return {
+      success: true,
+      data: data || [],
+    };
+
+  } catch (err) {
+    console.error("Error in getStationsByChildDB:", err);
+    return { success: false, error: err.message };
+  }
+};
+
 const endStationDB = async (childId, stationId, completed, correctas) => {
   const { data, error } = await supabaseCli
     .from("Estacion_Niño")
@@ -31,5 +61,6 @@ const endStationDB = async (childId, stationId, completed, correctas) => {
 
 module.exports = {
   getStationChildDB,
+  getStationsByChildDB,
   endStationDB
 };
