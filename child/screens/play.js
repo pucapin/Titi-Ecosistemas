@@ -4,6 +4,7 @@ export default function renderPlayChild(data) {
   const app = document.getElementById("app");
   app.innerHTML = `
         <h1>Mueve el celular hacia arriba para saltar!</h1>
+        <button id="start-game">Start!</button>
         `;
  // const startGameBtn = document.getElementById('start-game');
  // startGameBtn.addEventListener('click', initMotionEvent);
