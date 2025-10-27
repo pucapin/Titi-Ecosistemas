@@ -25,7 +25,7 @@ const getCheckpointQuestion = async (req, res) => {
 const showCheckpoint = async (req, res) => {
   const { checkpointId } = req.params;
   console.log("Show Checkpoint", checkpointId);
-  await emitEvent("showQuestion", checkpointId);
+  await emitEvent("showQuestion", {checkpointId});
   res.json({ ok: true });
 }
 

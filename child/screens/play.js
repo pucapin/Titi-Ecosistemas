@@ -17,9 +17,8 @@ export default function renderPlayChild(data) {
   initMotionEvent();
 
   //await makeRequest("/motion", "POST");
-  channel.on("broadcast",{event: "showQuestion"}, (checkpointId) => {
-    console.log("received")
-    navigateTo('/options', checkpointId )
+  channel.on("broadcast",{event: "showQuestion"}, ({payload}) => {
+    navigateTo('/options', payload.checkpointId)
   }).subscribe();
   // Request permission and initialize motion event on user interaction (e.g., button click)
 

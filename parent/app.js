@@ -67,7 +67,7 @@ function renderRoute(currentRoute) {
 }
 
 async function makeRequest(url, method, body) {
-  const BASE_URL = "http://localhost:5050";
+  const BASE_URL = "https://backend-three-rho-19.vercel.app";
   let response = await fetch(`${BASE_URL}${url}`, {
     method: method,
     headers: {

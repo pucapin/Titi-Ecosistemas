@@ -23,7 +23,6 @@ export default function renderOptions(data) {
 
     async function getOptions() {
         const response = await makeRequest(`/checkpoint/question/${data}`, "GET");
-        console.log("Response from API:", response);
         
         if (response && response.Preguntas) {
             questionTitle.innerHTML = response.Preguntas.pregunta;
