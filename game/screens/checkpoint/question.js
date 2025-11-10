@@ -45,7 +45,7 @@ export default function renderQuestion(data) {
     channel.on("broadcast",{event: "answer_result"}, (data) => {
     console.log("Answer result received:", data);
 
-    const { questionId, isCorrect, childId } = data;
+    const { questionId, isCorrect, childId } = data.payload;
 
     if(isCorrect === true) {
 

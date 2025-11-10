@@ -22,7 +22,7 @@ export function initHUD() {
     hud.image = new Image();
     hud.image.onload = () => resolve();
     hud.image.onerror = reject;
-    hud.image.src = "https://github.com/pucapin/Titi-Ecosistemas/blob/c3b80bb8d304de66f84df6d8ad1a9cc4f34c39db/assets/game/hud.png";
+    hud.image.src = "https://cmyrktpbeqcoodpebbuz.supabase.co/storage/v1/object/public/Assets/hud.png";
   });
 }
 
