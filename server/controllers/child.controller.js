@@ -1,8 +1,10 @@
 const {
-        loginOrRegisterChildDB, 
-        deleteChildDB,
-        updateChildPointsDB }
- = require("../db/child.db");
+  loginOrRegisterChildDB, 
+  deleteChildDB,
+  updateChildPointsDB,
+  getChildDB,
+  getChildAnswersDB 
+} = require("../db/child.db");
 const { emitEvent } = require("../services/socket.service");
 
 
@@ -55,9 +57,49 @@ const updateChildPoints = async (req, res) => {
   }
 };
 
+const getChild = async (req, res) => {
+  try {
+    const { id: childId } = req.params;
+    const response = await getChildDB(childId);
+    
+    if (!response.success) {
+      return res.status(404).json(response);
+    }
+    
+    res.json(response);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ 
+      success: false, 
+      error: err.message 
+    });
+  }
+};
+
+const getChildAnswers = async (req, res) => {
+  try {
+    const { id: childId } = req.params;
+    const response = await getChildAnswersDB(childId);
+    
+    if (!response.success) {
+      return res.status(404).json(response);
+    }
+    
+    res.json(response);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ 
+      success: false, 
+      error: err.message 
+    });
+  }
+};
+
 module.exports = {
   loginOrRegisterChild,
   updateChild,
   deleteChild,
   updateChildPoints,
+  getChild,
+  getChildAnswers,
 };
