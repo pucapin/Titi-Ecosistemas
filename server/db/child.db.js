@@ -115,8 +115,62 @@ const updateChildPointsDB = async (childId, points) => {
   }
 };
 
+const getChildDB = async (childId) => {
+  try {
+    const { data, error } = await supabaseCli
+      .from("Niño")
+      .select("*")
+      .eq("id", childId)
+      .maybeSingle();
+
+    if (error) throw error;
+
+    if (!data) {
+      return {
+        success: false,
+        error: "Child not found"
+      };
+    }
+
+    return {
+      success: true,
+      data: data
+    };
+  } catch (err) {
+    console.error("Error fetching child:", err);
+    return {
+      success: false,
+      error: err.message
+    };
+  }
+};
+
+const getChildAnswersDB = async (childId) => {
+  try {
+    const { data, error } = await supabaseCli
+      .from("Respuestas")
+      .select("*, Preguntas(pregunta, opcion_a, opcion_b, opcion_c, opcion_d)")
+      .eq("id_niño", childId);
+
+    if (error) throw error;
+
+    return {
+      success: true,
+      data: data
+    };
+  } catch (err) {
+    console.error("Error fetching child answers:", err);
+    return {
+      success: false,
+      error: err.message
+    };
+  }
+};
+
 module.exports = {
   loginOrRegisterChildDB,
   deleteChildDB,
-  updateChildPointsDB
+  updateChildPointsDB,
+  getChildDB,
+  getChildAnswersDB
 };

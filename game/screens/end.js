@@ -22,7 +22,7 @@ export default function renderEnd(data) {
   document.getElementById('final-points').textContent = `Puntos: ${points}`;
 
   // Obtener childId
-  const childId = '08c79a34-c634-43af-8cfd-1c80a5927cb2'; // Mismo ID que en options.js
+  const childId = localStorage.getItem("childId"); // Mismo ID que en options.js
   
   // Enviar puntos al servidor
   sendPointsToServer(childId, points);

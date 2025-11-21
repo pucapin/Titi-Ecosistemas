@@ -1,6 +1,6 @@
 const { emitEvent } = require("../services/socket.service");
 
-const { getStationChildDB, endStationDB } = require('../db/station_child.db');
+const { getStationChildDB, endStationDB, getStationProgressDB } = require('../db/station_child.db');
 
 const getStationChild = async (req, res) => {
   try {
@@ -24,4 +24,23 @@ const endStation = async (req, res) => {
   }
 };
 
-module.exports = { getStationChild, endStation };
+const getStationProgress = async (req, res) => {
+  try {
+    const { id: childId } = req.params;
+    const response = await getStationProgressDB(childId);
+    
+    if (!response.success) {
+      return res.status(404).json(response);
+    }
+    
+    res.json(response);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ 
+      success: false, 
+      error: err.message 
+    });
+  }
+};
+
+module.exports = { getStationChild, endStation, getStationProgress };

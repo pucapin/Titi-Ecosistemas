@@ -1,5 +1,4 @@
 
-
 const supabaseCli = require("../services/supabase.service");
 // Añadir todos los llamados con su descripción
 // GET Estacion por ID niño
@@ -28,8 +27,30 @@ const endStationDB = async (childId, stationId, completed, correctas) => {
   return data;
 };
 
+const getStationProgressDB = async (childId) => {
+  try {
+    const { data, error } = await supabaseCli
+      .from("Estacion_Niño")
+      .select("*, Estacion(name)")
+      .eq("id_niño", childId);
+
+    if (error) throw error;
+
+    return {
+      success: true,
+      data: data
+    };
+  } catch (err) {
+    console.error("Error fetching station progress:", err);
+    return {
+      success: false,
+      error: err.message
+    };
+  }
+};
 
 module.exports = {
   getStationChildDB,
-  endStationDB
+  endStationDB,
+  getStationProgressDB
 };
