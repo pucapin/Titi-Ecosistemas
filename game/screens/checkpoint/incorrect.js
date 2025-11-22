@@ -32,7 +32,7 @@ timeoutId = setTimeout(() => {
     const gamePoints = localStorage.getItem('gamePoints');
     const points = gamePoints ? Number(JSON.parse(gamePoints)) : 0;
     localStorage.removeItem('checkpointOrder');
-    makeRequest(`/stationchild/end`, "POST", {childId: childId, stationId: stationId, completed: true, correctas: correctAnswers})
+    makeRequest(`/stationchild`, "POST", {childId: childId, stationId: stationId, completed: true, correctas: correctAnswers})
     localStorage.removeItem('correctAnswers');
     navigateTo('/end', points);
     timeoutId = null;
