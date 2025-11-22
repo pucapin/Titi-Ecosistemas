@@ -30,7 +30,7 @@ export default function renderAnswers(data) {
 
       // Fetch Answers
       try {
-        const answersResponse = await fetch(`http://localhost:5050/child/${childId}/answers`);
+        const answersResponse = await fetch(`https://backend-three-rho-19.vercel.app/child/${childId}/answers`);
         const answersResult = await answersResponse.json();
 
         if (answersResult.success) {

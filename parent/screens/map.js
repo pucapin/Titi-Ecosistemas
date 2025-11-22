@@ -27,7 +27,7 @@ export default function renderMapParent(data) {
       }
 
       try {
-        const response = await fetch(`http://localhost:5050/stationchild/${childId}`);
+        const response = await fetch(`https://backend-three-rho-19.vercel.app/stationchild/${childId}`);
         const result = await response.json();
 
         if (result.success) {

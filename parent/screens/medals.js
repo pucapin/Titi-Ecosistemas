@@ -37,7 +37,7 @@ export default function renderResultsParent(data) {
 
       // Fetch Points
       try {
-        const pointsResponse = await fetch(`http://localhost:5050/child/${childId}`);
+        const pointsResponse = await fetch(`https://backend-three-rho-19.vercel.app/child/${childId}`);
         const pointsResult = await pointsResponse.json();
 
         if (pointsResult.success) {
@@ -54,7 +54,7 @@ export default function renderResultsParent(data) {
 
       // Fetch Medals (Completed Stations)
       try {
-        const stationsResponse = await fetch(`http://localhost:5050/stationchild/${childId}`);
+        const stationsResponse = await fetch(`https://backend-three-rho-19.vercel.app/stationchild/${childId}`);
         const stationsResult = await stationsResponse.json();
 
         if (stationsResult.success) {
