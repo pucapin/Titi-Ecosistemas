@@ -2,6 +2,7 @@ import renderMapChild from "./screens/map.js";
 import renderOptions from "./screens/options.js";
 import renderPlayChild from "./screens/play.js";
 import renderStartChild from "./screens/start.js";
+import renderScanned from "./screens/login.js";
 
 const SUPABASE_URL="https://cmyrktpbeqcoodpebbuz.supabase.co"
 const ANON_KEY ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNteXJrdHBiZXFjb29kcGViYnV6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg4Mjk2MjAsImV4cCI6MjA3NDQwNTYyMH0.pFgGt0Ycx2wAETy6TNV-62aWgO23ac7OypY8JksW0P8"
@@ -22,6 +23,10 @@ renderRoute(route);
 function renderRoute(currentRoute) {
   switch (currentRoute?.path) {
     case "/":
+      clearScripts();
+      renderScanned(currentRoute?.data);
+      break;
+    case "/start":
       clearScripts();
       renderStartChild(currentRoute?.data);
       break;

@@ -3,8 +3,31 @@ import { makeRequest, navigateTo, channel } from "../app.js";
 export default function renderPlayChild(data) {
   const app = document.getElementById("app");
   app.innerHTML = `
-        <h1>Mueve el celular hacia arriba para saltar!</h1>
+  <style>
+  .container {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+          }
+
+          h2 {
+            color: #FF600B;
+            font-size: 44px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 95%; /* 43.7px */
+            margin-left: 20px;
+            margin-top: 200px;
+            width: 330px;
+          }
+  </style>
+        <div class="container">
+        <h2>Mueve el celular hacia arriba para saltar!</h2>
         <button id="start-game">Start!</button>
+        <img src="https://cmyrktpbeqcoodpebbuz.supabase.co/storage/v1/object/public/Assets/jumping2.svg">
+        </div>
         `;
  // const startGameBtn = document.getElementById('start-game');
  // startGameBtn.addEventListener('click', initMotionEvent);

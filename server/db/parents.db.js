@@ -103,8 +103,9 @@ const deleteParentDB = async (userId) => {
   return data;
 };
 
+
 module.exports = {
   loginOrRegisterParentDB,
   updateParentDB,
-  deleteParentDB
+  deleteParentDB,
 };

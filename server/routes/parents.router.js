@@ -8,7 +8,7 @@ const {
 const router = express.Router();
 
 
-router.post("/", loginOrRegisterParent); // POST /parent
+router.post("/", loginOrRegisterParent); // POST /parents
 router.patch("/:id", updateParent);   // PATCH /parents/:id
 router.delete("/:id", deleteParent);  // DELETE /parents/:id
 

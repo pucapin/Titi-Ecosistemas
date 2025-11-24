@@ -1,4 +1,4 @@
-import { navigateTo } from "../app.js";
+import { navigateTo, makeRequest } from "../app.js";
 
 export default function renderHome(data) {
   const app = document.getElementById("app");
@@ -9,6 +9,10 @@ export default function renderHome(data) {
   <button id="go-screen-map">Map</button>
 
         `;
+
+  if(!localStorage.getItem("childId") || localStorage.getItem("childId") == "null") {
+    getChild(parentId)
+  }
   const questionsButton = document.getElementById("go-screen-questions");
   questionsButton.addEventListener("click", () => {
     navigateTo("/answers");

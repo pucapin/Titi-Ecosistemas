@@ -89,6 +89,7 @@ function navigateTo(path, data) {
 // Escuchar cuando un niño inicie sesión
 channel.on("broadcast",{event: "childLoggedIn"}, (data) => {
   console.log("Child logged in:", data);
+  localStorage.setItem("childId", data.payload.childId);
   navigateTo("/", {});
 }).subscribe();
 

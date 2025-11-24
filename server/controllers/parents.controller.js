@@ -1,6 +1,7 @@
 const { 
         loginOrRegisterParentDB, 
-        updateParentDB, 
+        updateParentDB,
+        getChildParentDB, 
         deleteParentDB }
 = require("../db/parents.db");
 
