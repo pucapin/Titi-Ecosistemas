@@ -32,8 +32,26 @@ const startGame = async (req, res) => {
   }
 };
 
+async function changeStation(req, res) {
+  try {
+    const { station } = req.body;
+
+    if (!station) {
+      return res.status(400).json({ error: "Missing station" });
+    }
+
+    await emitEvent("change-station", { station });
+
+    res.json({ ok: true, station });
+  } catch (err) {
+    console.error("Error changing station:", err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+}
+
 module.exports = { 
     getGames,
     getGameByChild,
-    startGame
+    startGame,
+    changeStation
 };

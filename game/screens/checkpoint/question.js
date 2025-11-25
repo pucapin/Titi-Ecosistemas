@@ -80,6 +80,13 @@ flex-wrap: wrap;
     box-sizing: border-box;
 }
 
+.contain {
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: column;
+}
+
 .titi {
     width: 300px;       
     height: auto;
@@ -185,7 +192,7 @@ box-shadow: 0 6px 0 0 #008B38;
     <p id="level-number">0</p>
     </div>
   </div>
-
+<div class="contain">
   <h1 id="question"></h1>
   <div class="options">
         <div id="option1">
@@ -243,6 +250,7 @@ box-shadow: 0 6px 0 0 #008B38;
 
 
   </svg>
+  </div>
 </div>
 
         `;

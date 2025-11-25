@@ -7,6 +7,7 @@ import renderEnd from "./screens/end.js";
 import renderScanGame from "./screens/scan.js";
 import renderTutorial from "./screens/tutorial.js";
 import renderRole from "./screens/role.js";
+import { setStation } from "./screens/game/running/resources.js";
 
 const SUPABASE_URL="https://cmyrktpbeqcoodpebbuz.supabase.co"
 const ANON_KEY ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNteXJrdHBiZXFjb29kcGViYnV6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg4Mjk2MjAsImV4cCI6MjA3NDQwNTYyMH0.pFgGt0Ycx2wAETy6TNV-62aWgO23ac7OypY8JksW0P8"
@@ -84,13 +85,24 @@ async function makeRequest(url, method, body) {
 }
 
 
-channel.on("broadcast",{event: "startGame"}, (data) => {
-  console.log("Game starting:", data);
-  navigateTo("/game", {});
-})
-.on("broadcast", { event: "startRoleSelection" }, (data) => {
-  console.log("Role selection starting:", data);
-  navigateTo("/role", {});
-})
-.subscribe();
+channel
+  .on("broadcast", { event: "startGame" }, (data) => {
+    console.log("Game starting:", data);
+    navigateTo("/game", {});
+  })
+  .on("broadcast", { event: "startRoleSelection" }, (data) => {
+    console.log("Role selection starting:", data);
+    navigateTo("/role", {});
+  })
+  .on("broadcast", { event: "change-station" }, (data) => {
+    console.log("Station changing:", data);
+
+    const newStation = data.payload.station;
+
+    setStation(newStation);         
+    navigateTo("/", {});
+  })
+  .subscribe();
+
+
 export { navigateTo, channel, makeRequest };

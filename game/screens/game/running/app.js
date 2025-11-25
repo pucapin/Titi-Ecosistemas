@@ -8,6 +8,7 @@ import { initBanana, updateBanana, drawBanana, checkBananaCollisions, resetBanan
 import { initHUD, updateHUD, drawHUD, addPoints, resetPoints, getPoints, setPoints } from "./hud.js";
 import { navigateTo, channel } from "../../../app.js";
 import { makeRequest } from "../../../app.js";
+import { getResource } from "./resources.js";
 
 // Variables globales para el juego
 let canvas;
@@ -17,8 +18,7 @@ let animationFrameId;
 let keydownHandler;
 let navigationTimeoutId = null;
 
-
-let checkpoints = ['0f65a854-4895-4b64-828a-d1505e92dbfe', '29ff798a-4ec9-414d-ad28-b70c8d43aae7', '4560b48d-3509-4faf-b92f-1ec1f61ccf40', '7910659b-7d97-43df-9403-660be15d9c3b', 'c68d7e1c-b874-4f43-b9e2-bd2cae3b9457', 'cfce72a3-c24b-4614-93e6-e9d2c14e9ae3' ];
+let checkpoints = getResource("checkpoints");
 
 async function gameLoop() {
   if (!game.running || isGameOver()) return;

@@ -1,5 +1,7 @@
 // Estado y lógica de los arbustos
 
+import { getResource } from "./resources.js";
+
 const bushes = {
   images: {
     bush1: null,
@@ -37,12 +39,12 @@ export function initBushes() {
     bushes.images.bush1 = new Image();
     bushes.images.bush1.onload = onLoad;
     bushes.images.bush1.onerror = onError;
-    bushes.images.bush1.src = "https://cmyrktpbeqcoodpebbuz.supabase.co/storage/v1/object/public/Assets/bush1.svg";
+    bushes.images.bush1.src = getResource("bush1");
 
     bushes.images.bush2 = new Image();
     bushes.images.bush2.onload = onLoad;
     bushes.images.bush2.onerror = onError;
-    bushes.images.bush2.src = "https://cmyrktpbeqcoodpebbuz.supabase.co/storage/v1/object/public/Assets/bush2.svg";
+    bushes.images.bush2.src = getResource("bush2");
   });
 }
 

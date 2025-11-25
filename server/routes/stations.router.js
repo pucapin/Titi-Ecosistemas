@@ -1,6 +1,7 @@
 const express = require("express");
 const {
-getStations
+getStations,
+changeStation
 } = require("../controllers/stations.controller");
 const router = express.Router();
 

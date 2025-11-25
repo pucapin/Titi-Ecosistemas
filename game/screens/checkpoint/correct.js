@@ -1,4 +1,5 @@
 import { navigateTo, makeRequest } from "../../app.js";
+import { getResource } from "../game/running/resources.js";
 
 let timeoutId = null;
 
@@ -44,7 +45,8 @@ export default function renderCorrect(data) {
         <img src="https://cmyrktpbeqcoodpebbuz.supabase.co/storage/v1/object/public/Assets/titi0.png" width="300px"; height="auto">
         </div>
         `;
-  const stationId = '162cdd3f-c666-46b4-8412-a998dd54ff76'; // Mocked por ahora
+  
+  const stationId = getResource("stationId"); // Mocked por ahora
   const childId = data.childId;
   const correctAnswers = Number(localStorage.getItem('correctAnswers'));
   const checkpoint = Number(localStorage.getItem('checkpoint'));
@@ -94,6 +96,7 @@ timeoutId = setTimeout(() => {
     localStorage.removeItem('checkpointOrder')
     makeRequest(`/stationchild`, "POST", {childId: childId, stationId: stationId, completed: true, correctas: correctAnswers});
     localStorage.removeItem('correctAnswers');
+    makeRequest("/station/change", "POST", { station: "titiEstacion" });
     navigateTo('/end', points);
     timeoutId = null;
     return;
