@@ -4,9 +4,10 @@
               height: 100vh;
               background: #FFF1E0;
               background-image: url(https://cmyrktpbeqcoodpebbuz.supabase.co/storage/v1/object/public/Assets/grassbg.png);
-              background-size: 100%;
+              background-size: cover;
               background-repeat: no-repeat;
               margin: none;
+              padding: none;
             font-family: "Outfit", sans-serif;
 
                 
@@ -127,5 +128,7 @@
   0% { opacity: 1; transform: translateX(0); }
   100% { opacity: 0; transform: translateX(150%); }
 }
+
+
 
       }
