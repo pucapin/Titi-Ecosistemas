@@ -93,4 +93,4 @@ channel.on("broadcast",{event: "childLoggedIn"}, (data) => {
   navigateTo("/", {});
 }).subscribe();
 
-export { navigateTo, channel, makeRequest};
+export { navigateTo, channel, makeRequest, supabaseClient};

@@ -97,6 +97,7 @@ export default function renderStartParent(data) {
       if (response?.user?.id) {
         localStorage.setItem("parentId", response.user.id);
         localStorage.setItem("childId", response.user.id_niño);
+        localStorage.setItem("parentName", username);
       }
       if (response?.user?.join_code) {
         localStorage.setItem("joinCode", response.user.join_code);
