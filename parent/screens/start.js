@@ -47,6 +47,11 @@ export default function renderStartParent(data) {
 </svg></div>
 <p id="back">Atrás</p>
       </div>
+      <div id="jungle-alert" class="jungle-alert hidden">
+        <div class="jungle-alert-content">
+          <span id="jungle-alert-message"></span>
+        </div>
+      </div>
       <h2>Ingresa tu nombre y contraseña!</h2>
       <input type="text" placeholder="Nombre" required id="input-user"/>
       <input type="password" placeholder="Contraseña" required id="input-password"/>
@@ -54,10 +59,41 @@ export default function renderStartParent(data) {
       </div>
         `;
 
+        function jungleAlert(message) {
+          const alertBox = document.getElementById("jungle-alert");
+          const messageBox = document.getElementById("jungle-alert-message");
+        
+          messageBox.textContent = message;
+          alertBox.classList.remove("hidden");
+        
+          setTimeout(() => {
+            alertBox.style.animation = "vine-hide 0.6s forwards";
+        
+            setTimeout(() => {
+              alertBox.classList.add("hidden");
+              alertBox.style.animation = ""; 
+            }, 600);
+        
+          }, 2700);
+        }
+
+
   
     async function sendParentData(username, password) {
+      if (!username || !password) {
+        jungleAlert("Recuerda llenar todos los datos!");
+        return;
+      }
       const response = await makeRequest("/parent", "POST", {username: username, password: password} );
       console.log("response", response);
+
+      if (!response || response.error) {
+        console.error("Error creando parent:", response);
+        jungleAlert("Recuerda llenar los datos!");
+        return;
+      }
+
+
       if (response?.user?.id) {
         localStorage.setItem("parentId", response.user.id);
         localStorage.setItem("childId", response.user.id_niño);
