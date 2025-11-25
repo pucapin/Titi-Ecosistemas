@@ -1,0 +1,134 @@
+@media only screen and (max-width:767px) {
+    body {
+        width: 100vw;
+        height: 100vh;
+        background: #FFF1E0;
+        background-image: url(https://cmyrktpbeqcoodpebbuz.supabase.co/storage/v1/object/public/Assets/grassbg.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+        margin: none;
+        padding: none;
+      font-family: "Outfit", sans-serif;
+
+          
+
+    }
+
+    button {
+      color: #FFF;
+      font-family: Outfit;
+      font-size: 36px;
+      font-weight: 600;
+      line-height: 93%;
+      border: none;
+      display: flex;
+      width: 254px;
+      height: 62px;
+      padding: 8px 49px;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      border-radius: 12px;
+      background: #2DB9FF;
+      box-shadow: 0 14px 0 0 #3E9FD0;
+      cursor: pointer;
+      margin-bottom: 32px;
+      transition: transform 0.2s cubic-bezier(.2, .8, .3, 1),
+                  box-shadow 0.2s cubic-bezier(.2, .8, .3, 1),
+                  background 0.2s ease;
+      }
+
+      button:hover {
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 18px 0 0 #3E9FD0;
+      background: #33c7ff;
+      }
+
+      button:active {
+      transform: translateY(4px) scale(0.97);
+      box-shadow: 0 6px 0 0 #3E9FD0;
+      background: #22aee6;
+      }
+
+        input {
+      color: #FF600B;
+      width: 254px;
+      height: 62px;
+      flex-shrink: 0;
+      border-radius: 12.543px;
+      border: 2px solid var(--green, #01AD47);
+      background: #FFF;
+      font-family: Outfit;
+      font-size: 21.961px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 93%; /* 20.424px */
+      padding-left: 4px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+    }
+      
+    input:focus {
+      outline: none !important;
+      color: #FF600B;
+    }
+
+      input::placeholder {
+      opacity: 0.5;
+      color: #FF600B;
+      }
+
+      .jungle-alert {
+position: fixed;
+top: 20px;
+right: 20px;
+z-index: 9999;
+padding: 0;
+margin: 0;
+}
+
+.jungle-alert.hidden {
+opacity: 0;
+pointer-events: none;
+transform: translateX(150%);
+}
+
+.jungle-alert-content {
+background: linear-gradient(145deg, #3fa85a, #32a351);
+color: #fff;
+padding: 16px 22px;
+border-radius: 14px;
+font-family: 'Outfit', sans-serif;
+font-size: 20px;
+font-weight: 600;
+box-shadow: 0 8px 0 #1f5c31;
+border: 3px solid #a5e68a;
+display: flex;
+align-items: center;
+gap: 10px;
+animation: vine-pop 0.6s ease-out forwards;
+
+}
+
+@keyframes vine-pop {
+0% {
+transform: scale(0.6) rotate(-6deg);
+filter: blur(4px);
+}
+60% {
+transform: scale(1.05) rotate(2deg);
+}
+100% {
+transform: scale(1) rotate(0);
+filter: blur(0);
+}
+}
+
+@keyframes vine-hide {
+0% { opacity: 1; transform: translateX(0); }
+100% { opacity: 0; transform: translateX(150%); }
+}
+
+
+
+}

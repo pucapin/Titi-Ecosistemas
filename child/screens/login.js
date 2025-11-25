@@ -38,10 +38,15 @@ export default function renderScanned() {
     const adultBtn = document.getElementById("adult");
     const childBtn = document.getElementById("child");
 
-    if(!childBtn) {
+    if(!childBtn || !adultBtn) {
         return;
     }
-        childBtn.addEventListener('click', () => {
+
+    adultBtn.addEventListener('click', () => {
+      window.location.href = "https://parent-alpha.vercel.app/";
+    });
+
+    childBtn.addEventListener('click', () => {
         navigateTo("/start");
     })
 
