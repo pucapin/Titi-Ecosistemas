@@ -74,4 +74,9 @@ export default function renderStartParent(data) {
       const pass = document.getElementById("input-password").value;
       sendParentData(user, pass)
     });
+
+    const backBtn = document.getElementById('back-btn');
+    backBtn.addEventListener('click', () => {
+      window.location.href = "https://child-mocha.vercel.app/";
+    });
 }
