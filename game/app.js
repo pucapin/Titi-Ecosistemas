@@ -87,5 +87,10 @@ async function makeRequest(url, method, body) {
 channel.on("broadcast",{event: "startGame"}, (data) => {
   console.log("Game starting:", data);
   navigateTo("/game", {});
-}).subscribe();
+})
+.on("broadcast", { event: "startRoleSelection" }, (data) => {
+  console.log("Role selection starting:", data);
+  navigateTo("/role", {});
+})
+.subscribe();
 export { navigateTo, channel, makeRequest };

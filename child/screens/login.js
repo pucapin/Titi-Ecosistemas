@@ -1,6 +1,11 @@
-import { makeRequest, navigateTo } from "../app.js";
+import { makeRequest, navigateTo, channel } from "../app.js";
 
 export default function renderScanned() {
+  channel.send({
+    type: "broadcast",
+    event: "startRoleSelection",
+    payload: {},
+  });
   const app = document.getElementById("app");
   app.innerHTML = `
   <style>
