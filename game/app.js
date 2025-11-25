@@ -100,7 +100,7 @@ channel
     const newStation = data.payload.station;
 
     setStation(newStation);         
-    navigateTo("/", {});
+    navigateTo("/game", {});
   })
   .subscribe();
 
