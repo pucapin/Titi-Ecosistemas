@@ -1,5 +1,7 @@
 // Estado y lógica del obstáculo
 
+import { getResource } from "./resources.js";
+
 const obstacle = {
   image: null,
   instances: [],
@@ -7,8 +9,8 @@ const obstacle = {
   spawnInterval: 8000, // Aparecer cada 8 segundos
   speed: 0.4  ,
   scale: 0.5,
-  width: 167,
-  height: 173,
+  width: getResource("obstacleWidth"),
+  height: getResource("obstacleHeight"),
   isGameOver: false
 };
 
@@ -21,7 +23,7 @@ export function initObstacle() {
     obstacle.image = new Image();
     obstacle.image.onload = () => resolve();
     obstacle.image.onerror = reject;
-    obstacle.image.src = "https://cmyrktpbeqcoodpebbuz.supabase.co/storage/v1/object/public/Assets/obstacle.svg";
+    obstacle.image.src = getResource("obstacle");
   });
 }
 

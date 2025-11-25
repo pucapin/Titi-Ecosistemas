@@ -1,4 +1,5 @@
 // Estado y lógica del escenario (fondo)
+import { getResource } from "./resources.js";
 
 const background = {
     x1: 0,
@@ -50,7 +51,7 @@ export function initScene(ctx, game) {
             onImageLoad();
         };
         background.image.onerror = onImageError;
-        background.image.src = 'https://cmyrktpbeqcoodpebbuz.supabase.co/storage/v1/object/public/Assets/scene.svg';
+        background.image.src = getResource("background");
         
         // Cargar imagen del árbol
         trees.image = new Image();
@@ -61,7 +62,7 @@ export function initScene(ctx, game) {
             onImageLoad();
         };
         trees.image.onerror = onImageError;
-        trees.image.src = 'https://cmyrktpbeqcoodpebbuz.supabase.co/storage/v1/object/public/Assets/tree.svg';
+        trees.image.src = getResource("trees");
     });
 }
 

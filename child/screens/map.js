@@ -1,3 +1,4 @@
+import { makeRequest } from "../app.js";
 
 export default function renderMapChild() {
   const app = document.getElementById("app");
@@ -56,7 +57,6 @@ export default function renderMapChild() {
       `;
       const childId = localStorage.getItem("childId");
       const titiStation = document.getElementById("titi-station");
-      const meerStation = document.getElementById("meer-station");
       const nutriStation = document.getElementById("nutri-station");
 
     const fetchStationProgress = async () => {
@@ -81,8 +81,8 @@ export default function renderMapChild() {
 
               if(item.Estacion.name == "EstacionTiti") {
                 titiStation.src = `https://cmyrktpbeqcoodpebbuz.supabase.co/storage/v1/object/public/Assets/${"titi" + starNumber}.png`
-              } else if (item.Estacion.name =="EstacionSuri") {
-                meerStation.src = ""
+              } else if (item.Estacion.name =="EstacionNutria") {
+                nutriStation.src = `https://cmyrktpbeqcoodpebbuz.supabase.co/storage/v1/object/public/Assets/${"nutri" + starNumber}.svg`;
               }
             });
           }
@@ -101,4 +101,9 @@ export default function renderMapChild() {
   };
 
   fetchStationProgress();
+
+  nutriStation.addEventListener('click', () => {
+    makeRequest("/games/change", "POST", { station: "nutriStation" });
+  })
+
 }
