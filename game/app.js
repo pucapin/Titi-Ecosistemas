@@ -87,10 +87,16 @@ async function makeRequest(url, method, body) {
 channel
   .on("broadcast", { event: "startGame" }, (data) => {
     console.log("Game starting:", data);
+    if (data.payload && data.payload.childId) {
+      localStorage.setItem("childId", data.payload.childId);
+    }
     navigateTo("/game", {});
   })
   .on("broadcast", { event: "startRoleSelection" }, (data) => {
     console.log("Role selection starting:", data);
+    if (data.payload && data.payload.childId) {
+      localStorage.setItem("childId", data.payload.childId);
+    }
     navigateTo("/role", {});
   })
   .on("broadcast", { event: "change-station" }, (data) => {
