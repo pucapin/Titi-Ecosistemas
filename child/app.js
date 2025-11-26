@@ -3,6 +3,9 @@ import renderOptions from "./screens/options.js";
 import renderPlayChild from "./screens/play.js";
 import renderStartChild from "./screens/start.js";
 import renderScanned from "./screens/login.js";
+import renderTutorial1 from "./screens/tutorial1.js";
+import renderTutorial2 from "./screens/tutorial2.js";
+import renderTutorial3 from "./screens/tutorial3.js";
 
 const SUPABASE_URL="https://cmyrktpbeqcoodpebbuz.supabase.co"
 const ANON_KEY ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNteXJrdHBiZXFjb29kcGViYnV6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg4Mjk2MjAsImV4cCI6MjA3NDQwNTYyMH0.pFgGt0Ycx2wAETy6TNV-62aWgO23ac7OypY8JksW0P8"
@@ -41,6 +44,18 @@ function renderRoute(currentRoute) {
     case "/options":
       clearScripts();
       renderOptions(currentRoute?.data);
+      break;
+    case "/tutorial1":
+      clearScripts();
+      renderTutorial1(currentRoute?.data);
+      break;
+    case "/tutorial2":
+      clearScripts();
+      renderTutorial2(currentRoute?.data);
+      break;
+    case "/tutorial3":
+      clearScripts();
+      renderTutorial3(currentRoute?.data);
       break;
     default:
       const app = document.getElementById("app");

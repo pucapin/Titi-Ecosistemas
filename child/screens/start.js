@@ -98,7 +98,7 @@ async function sendChildData(username, code) {
 
   localStorage.setItem("childId", response.user.id);
 
-  navigateTo("/play", response);
+  navigateTo("/tutorial1", response);
 }
 
 const backBtn = document.getElementById("back-btn");
