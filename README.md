@@ -1,57 +1,67 @@
-# Titi Team Code of Conduct
-### Contributors: 
-- Eli 😸
-- Santiago 😠
-- Isabella 😃
+# Titi! Interactive Zoo Display
+Titi es un proyecto interactivo compuesto por múltiples estaciones (juego, selección de roles, checkpoints, preguntas, etc.) que se comunican en tiempo real mediante eventos. El sistema incluye vistas para niños, padres y administradores, así como un backend en Node.js con Express, Socket.IO y Supabase.
 
-## 1. Introduction
-Welcome to Titi's code of conduct, to ensure that our collaboration is productive and we don't accidentally delete the project 😟, all devs must adhere to the following rules
+## Tecnologías utilizadas
 
-## 2. Commit Conventions
-We need a clear commit history, so follow these simple rules: 😮
+1. Node.js + Express
+2. Supabase Realtime
+3. Supabase (Base de datos)
+4. JavaScript, HTML y CSS
+5. Vercel
 
-- **feat:** Adding a new feature
-- **fix:** Fixing a bug
-- **docs:** Updating documentation
-- **style:** Formatting or style changes (no code changes)
-- **refactor:** Code improvements without changing behavior
-- **test:** Adding or updating tests
-- **chore:** Maintenance tasks
+## Requisitos previos !
 
-### For example
+Para correr el proyecto localmente es necesario tener instalado: 
+
+- Node.js
+- npm
+- Base de datos Supabase
+- Un archivo .env con las variables necesarias (explicación en la sección de variables de entorno)
+
+##Instalación
+
+Sigue estos pasos
+
+1. Clonar el Repositorio
+
+2. Instalar dependencias
+   
+   ```
+   npm install
+   ```
+3. Crear el archivo .env en la raiz del proyecto. No se puede subir a ningún repositorio. (Importante!)
+
+Aquí se colocan las variables de tu base de datos.
+
 ```
-feat: added the avatar picker
+SUPABASE_URL=...
+SUPABASE_KEY=...
+SUPABASE_SERVICE_ROLE=...
 ```
 
-## 3. Branching Model
-We use the **Gitflow** workflow to manage branches ! :3
+4. Iniciar el servidor localmente
 
-- `main` - Final product
-- `develop` - Main development branch
-- `feature/{feature-name}` - New features or enhancements
-- `bugfix/{issue-number}` - Bug fixes
-- `hotfix/{issue-number}` - Critical production fixes
-- `release/{version}` - Pre-release branch for testing
+Se inicia en http://localhost:5050, las vistas se encuentran en /child, /parent y /game.
 
-### Guidelines:
-- Always branch from `develop` for new features or bug fixes.
-- Create a pull request before merging changes.
-- Use descriptive branch names. 👍
+```
+npm run dev
+```
 
-## 4. Technologies and Libraries 🤖
+## Endpoints:
 
-These are the libraries that we use hehehehe
+/games – Iniciar juego, terminarlo o cambiar estación
 
-### We use: 🎂
-- JavaScript, HTML, CSS
-- Node.js, Webpack, Supabase, Express.js.
+/child – Registro y datos de niños
 
-## Behavior:
-- **communication** please communicate your thoughts and ideas to the team!
-- **obligations** complete your tasks on time :3
+/parent – Registro de padres
 
-  
-## 6. Consequences
-If you do not follow these rules.....
+/questions – Consulta de preguntas por estación
 
-Thank you Titi team, we got this! 🍰🌠
+/checkpoint – Guardar y obtener progreso
+
+/motion – Evento de motion en tiempo real
+
+## Backup de Schemas
+
+En el repositorio encontrarán el Backup de Schemas de Supabase, dentro de la carpeta /database.
+
