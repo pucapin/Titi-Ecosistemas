@@ -1,10 +1,11 @@
 import { makeRequest, navigateTo, channel } from "../app.js";
 
 export default function renderScanned() {
+  const childId = localStorage.getItem("childId");
   channel.send({
     type: "broadcast",
     event: "startRoleSelection",
-    payload: {},
+    payload: { childId: childId },
   });
   const app = document.getElementById("app");
   app.innerHTML = `

@@ -99,6 +99,12 @@ channel
     }
     navigateTo("/role", {});
   })
+  .on("broadcast", { event: "syncChildId" }, (data) => {
+    console.log("ChildId Sync received:", data);
+    if (data.payload && data.payload.childId) {
+      localStorage.setItem("childId", data.payload.childId);
+    }
+  })
   .on("broadcast", { event: "change-station" }, (data) => {
     console.log("Station changing:", data);
 

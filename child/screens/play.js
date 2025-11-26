@@ -34,7 +34,23 @@ export default function renderPlayChild(data) {
   
   const startGameBtn = document.getElementById('start-game');
   startGameBtn.addEventListener('click', async () => {
-    await makeRequest("/games/start", "POST", {});
+    const childId = localStorage.getItem("childId");
+    
+    // Send syncChildId event first to ensure game has the ID
+    channel.send({
+      type: 'broadcast',
+      event: 'syncChildId',
+      payload: { childId: childId }
+    });
+    
+    // Also include it in startGame payload if needed
+    channel.send({
+      type: 'broadcast',
+      event: 'startGame',
+      payload: { childId: childId }
+    });
+
+    await makeRequest("/games/start", "POST", { childId });
   });
   
   initMotionEvent();
