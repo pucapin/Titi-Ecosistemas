@@ -89,30 +89,39 @@ font-weight: 600;
     const gamePoints = localStorage.getItem('gamePoints');
     points = gamePoints ? Number(JSON.parse(gamePoints)) : 0;
   }
-  
+
   // Mostrar puntos
   document.getElementById('final-points').textContent = `${points}`;
 
   // Obtener childId
   const childId = localStorage.getItem("childId"); // Mismo ID que en options.js
-  
+
   // Enviar puntos al servidor
   sendPointsToServer(childId, points);
 
   setTimeout(() => {
-  navigateTo("/"); 
-}, 5000);
+    navigateTo("/");
+  }, 5000);
 }
 
 async function sendPointsToServer(childId, points) {
   try {
-    const response = await makeRequest(`/child/${childId}/points`, "PATCH", { 
-      points: points 
+    const childResponse = await makeRequest(`/child/${childId}`, "GET");
+    let currentPoints = 0;
+
+    if (childResponse.success && childResponse.data && childResponse.data.puntos) {
+      currentPoints = childResponse.data.puntos;
+    }
+
+    const newTotalPoints = currentPoints + points;
+
+    const response = await makeRequest(`/child/${childId}/points`, "PATCH", {
+      points: newTotalPoints
     });
-    
+
     if (response.success) {
       console.log('Points saved:', response);
-      
+
       // Limpiar los puntos del localStorage DESPUÉS de enviarlos exitosamente
       localStorage.removeItem('gamePoints');
       localStorage.setItem('checkpointOrder', JSON.stringify([]));
