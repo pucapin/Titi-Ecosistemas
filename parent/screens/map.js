@@ -97,14 +97,14 @@ export default function renderMapChild() {
 
           .map {
               width: 100%;
-              height: 100vh; /* Full screen height */
-              display: block; /* Changed from inline-block */
+              max-height: 100vh; 
+              display: block; 
               margin: 0px;
-              position: absolute; /* Changed to absolute */
+              position: absolute;
               top: 0;
               left: 0;
               background-position: center;
-              z-index: 1; /* Behind navbar */
+              z-index: 1;
           }
           .mapa-img {
               width: 100%;
