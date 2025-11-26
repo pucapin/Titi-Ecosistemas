@@ -19,16 +19,18 @@ export default function renderScanGame(data) {
             width: 100vw;
      height: 100vh;
      background: #FFF1E0;
-     background-image: url(https://cmyrktpbeqcoodpebbuz.supabase.co/storage/v1/object/public/Assets/grassbg.png);
+     background-image: url(https://cmyrktpbeqcoodpebbuz.supabase.co/storage/v1/object/public/Assets/webbg.png);
      background-size: cover;
+     background-position: center;
      background-repeat: no-repeat;
-     margin: none;
-     padding: none;
+     margin: 0;
+     padding: 0;
+
         }
 
         .scan-container {
             width: 100%;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -42,8 +44,8 @@ font-size: 36.73px;
 font-style: normal;
 font-weight: 900;
 line-height: 93%; /* 34.159px */
-            margin-top: 150px;
             margin-bottom: 10px;
+            margin-top: 50%;
             text-align: center;
         }
 

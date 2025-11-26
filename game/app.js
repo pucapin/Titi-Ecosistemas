@@ -5,7 +5,6 @@ import renderGame from "./screens/game/running/game.js";
 import renderLost from "./screens/game/lost.js";
 import renderEnd from "./screens/end.js";
 import renderScanGame from "./screens/scan.js";
-import renderTutorial from "./screens/tutorial.js";
 import renderRole from "./screens/role.js";
 import { setStation } from "./screens/game/running/resources.js";
 
