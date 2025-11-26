@@ -1,6 +1,6 @@
 import { navigateTo } from "../app.js";
 
-export default function renderAnswers(data) {
+export default function renderResultsParent(data) {
   const app = document.getElementById("app");
   app.innerHTML = `
             <div id="results-container">
@@ -28,9 +28,23 @@ export default function renderAnswers(data) {
         return;
       }
 
+      // Fetch Points
+      try {
+        const pointsResponse = await fetch(`http://localhost:5050/child/${childId}`);
+        const pointsResult = await pointsResponse.json();
+
+        if (pointsResult.success) {
+          console.log(pointsResult.data);
+        } else {
+          console.error(pointsResult.error);
+        }
+      } catch (e) {
+        console.error(e);
+      }
+
       // Fetch Answers
       try {
-        const answersResponse = await fetch(`https://backend-three-rho-19.vercel.app/child/${childId}/answers`);
+        const answersResponse = await fetch(`http://localhost:5050/child/${childId}/answers`);
         const answersResult = await answersResponse.json();
 
         if (answersResult.success) {
@@ -40,6 +54,7 @@ export default function renderAnswers(data) {
             let html = '<ul style="list-style-type: none; padding: 0;">';
             
             answersResult.data.forEach(item => {
+              const questionText = item.Preguntas ? item.Preguntas.pregunta : "Pregunta no encontrada";
               
               let answerText = item.respuesta;
               if (item.Preguntas && item.respuesta) {
@@ -50,12 +65,9 @@ export default function renderAnswers(data) {
                 }
               }
 
-              const isCorrect = item.correcta ? "Correcta" : "Incorrecta";
-              const color = item.correcta ? "green" : "red";
-
               html += `<li style="margin-bottom: 15px; border-bottom: 1px solid #ccc; padding-bottom: 10px;">
+                        <div style="font-weight: bold;">${questionText}</div>
                         <div>R: ${answerText}</div>
-                        <div style="color: ${color}; font-weight: bold;">${isCorrect}</div>
                        </li>`;
             });
             

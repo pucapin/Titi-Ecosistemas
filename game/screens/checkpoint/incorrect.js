@@ -85,7 +85,7 @@ timeoutId = setTimeout(() => {
     localStorage.removeItem('checkpointOrder');
     makeRequest(`/stationchild`, "POST", {childId: childId, stationId: stationId, completed: true, correctas: correctAnswers})
     localStorage.removeItem('correctAnswers');
-    makeRequest("/station/change", "POST", { station: "titiEstacion" });
+    makeRequest("/games/change", "POST", { station: "titiEstacion" });
     navigateTo('/end', points);
     timeoutId = null;
     return;

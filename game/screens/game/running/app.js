@@ -22,6 +22,9 @@ let checkpoints = getResource("checkpoints");
 
 async function gameLoop() {
   if (!game.running || isGameOver()) return;
+  // Update checkpoints reference in each loop in case station changed
+  checkpoints = getResource("checkpoints");
+  
   ctx.clearRect(0, 0, game.width, game.height);
   updateScene(game);
   updateMonkey(game);
