@@ -93,7 +93,7 @@ font-weight: 600;
 
   // Obtener puntos - primero intentar del data, luego del localStorage
   let points = 0;
-  if (data && typeof data === 'number') {
+  if (typeof data === 'number') {
     points = data;
   } else {
     const gamePoints = localStorage.getItem('gamePoints');
@@ -107,11 +107,18 @@ font-weight: 600;
   const childId = localStorage.getItem("childId"); // Mismo ID que en options.js
 
   // Enviar puntos al servidor
-  sendPointsToServer(childId, points);
-
-  setTimeout(() => {
-    navigateTo("/");
-  }, 5000);
+  if (childId) {
+    sendPointsToServer(childId, points).finally(() => {
+        setTimeout(() => {
+            navigateTo("/");
+        }, 5000);
+    });
+  } else {
+    console.error("No childId found in localStorage");
+    setTimeout(() => {
+        navigateTo("/");
+    }, 5000);
+  }
 }
 
 async function sendPointsToServer(childId, points) {
