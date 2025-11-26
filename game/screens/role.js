@@ -30,7 +30,6 @@ export default function renderRole(data) {
             .role-container {
                 width: 100%;
                 height: 100vh;
-                background-color: #FFF7E9;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
